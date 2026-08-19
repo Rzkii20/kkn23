@@ -4,7 +4,7 @@
 
 @section('content')
     <!-- HEADER COVER -->
-    <div class="py-4 py-md-5 text-white position-relative" style="background: linear-gradient(rgba(0, 48, 73, 0.7), rgba(0, 48, 73, 0.7)), url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2000&auto=format&fit=crop') no-repeat center center; background-size: cover;">
+    <div class="py-4 py-md-5 text-white position-relative" style="background: linear-gradient(rgba(0, 48, 73, 0.7), rgba(0, 48, 73, 0.7)), url('{{ asset('images/tentang-desa.jpg') }}') no-repeat center center; background-size: cover;">
         <div class="container text-center py-2 py-md-3">
             <h1 class="fs-2 fs-md-1 fw-bold mb-2">Tentang Desa Sebong Lagoi</h1>
             <p class="lead text-white-50 fs-6 fs-md-5 mb-0">Sejarah Singkat, Visi, Misi, dan Struktur Organisasi Desa</p>
@@ -52,6 +52,57 @@
         </div>
     </section>
 
+    <!-- ====================================================
+         PETA DESA SECTION
+         ==================================================== -->
+    <section class="py-5" style="background: var(--sea-blue-light);">
+        <div class="container">
+            <div class="text-center mb-5 reveal">
+                <div class="section-tagline justify-content-center" style="color: var(--sea-blue);">
+                    <span style="width:20px; height:2px; background: var(--sea-blue); display:inline-block;"></span>
+                    Lokasi Kami
+                </div>
+                <h2 class="section-title">Peta Desa Sebong Lagoi</h2>
+                <p class="section-subtitle mx-auto mt-2">Jelajahi letak geografis dan batas wilayah Desa Sebong Lagoi melalui peta di bawah ini.</p>
+            </div>
+            
+            <div class="row justify-content-center reveal">
+                <div class="col-lg-10">
+                    <div style="background: white; padding: 15px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+                        <!-- Pastikan Anda meletakkan gambar peta Anda di folder public/images dengan nama peta-desa.jpg -->
+                        <img src="{{ asset('images/peta-desa.jpg') }}" 
+                             onerror="this.src='https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1000&auto=format&fit=crop'" 
+                             alt="Peta Desa Sebong Lagoi" 
+                             class="img-fluid rounded-4 w-100" 
+                             style="max-height: 600px; object-fit: contain; cursor: pointer;"
+                             data-bs-toggle="modal" data-bs-target="#petaModal">
+                    </div>
+                    <div class="text-center mt-3">
+                        <small class="text-muted"><i class="bi bi-info-circle"></i> Klik gambar peta untuk memperbesar.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Peta -->
+    <div class="modal fade" id="petaModal" tabindex="-1" aria-labelledby="petaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content border-0 bg-transparent">
+                <div class="modal-header border-0 d-flex justify-content-end pb-0">
+                    <button type="button" class="btn-close btn-close-white fs-4" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1); background-color: rgba(255,255,255,0.8); border-radius: 50%; padding: 10px; opacity: 1;"></button>
+                </div>
+                <div class="modal-body text-center pt-0">
+                    <img src="{{ asset('images/peta-desa.jpg') }}" 
+                         onerror="this.src='https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1200&auto=format&fit=crop'" 
+                         alt="Peta Desa Sebong Lagoi" 
+                         class="img-fluid rounded-3 shadow-lg"
+                         style="max-height: 85vh;">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- GEOGRAFIS & STATISTIK SECTION -->
     <section class="py-4 py-md-5 bg-light">
         <div class="container">
@@ -96,4 +147,5 @@
             </div>
         </div>
     </section>
+
 @endsection
