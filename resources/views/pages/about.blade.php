@@ -4,7 +4,7 @@
 
 @section('content')
     <!-- HEADER COVER -->
-    <div class="py-4 py-md-5 text-white" style="background: linear-gradient(135deg, var(--sea-blue) 0%, var(--mangrove-green) 100%);">
+    <div class="py-4 py-md-5 text-white position-relative" style="background: linear-gradient(rgba(0, 48, 73, 0.7), rgba(0, 48, 73, 0.7)), url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2000&auto=format&fit=crop') no-repeat center center; background-size: cover;">
         <div class="container text-center py-2 py-md-3">
             <h1 class="fs-2 fs-md-1 fw-bold mb-2">Tentang Desa Sebong Lagoi</h1>
             <p class="lead text-white-50 fs-6 fs-md-5 mb-0">Sejarah Singkat, Visi, Misi, dan Struktur Organisasi Desa</p>

@@ -28,7 +28,7 @@
                     </div>
 
                     <h1 class="hero-title animate-fade-in-delay-1">
-                        Sistem Informasi<br class="d-none d-lg-inline">
+                        Informasi<br class="d-none d-lg-inline">
                         <span class="text-gold-highlight">UMKM & Wisata</span><br class="d-none d-lg-inline">
                         Desa Sebong Lagoi
                     </h1>
@@ -57,7 +57,7 @@
                                 </div>
                                 <div>
                                     <p style="font-size:0.75rem; color:rgba(255,255,255,0.7); margin:0;">Total UMKM Aktif</p>
-                                    <h4 style="color:white; font-weight:800; margin:0; font-size:1.5rem;">120+</h4>
+                                    <h4 style="color:white; font-weight:800; margin:0; font-size:1.5rem;">{{ $statsUmkm }}</h4>
                                 </div>
                             </div>
                             <div style="height:4px; background:rgba(255,255,255,0.1); border-radius:2px; overflow:hidden;">
@@ -71,7 +71,7 @@
                                 </div>
                                 <div>
                                     <p style="font-size:0.75rem; color:rgba(255,255,255,0.7); margin:0;">Destinasi Wisata</p>
-                                    <h4 style="color:white; font-weight:800; margin:0; font-size:1.5rem;">15+</h4>
+                                    <h4 style="color:white; font-weight:800; margin:0; font-size:1.5rem;">{{ $statsWisata }}</h4>
                                 </div>
                             </div>
                             <div style="height:4px; background:rgba(255,255,255,0.1); border-radius:2px; overflow:hidden;">
@@ -85,7 +85,7 @@
                                 </div>
                                 <div>
                                     <p style="font-size:0.75rem; color:rgba(255,255,255,0.7); margin:0;">Produk Terdaftar</p>
-                                    <h4 style="color:white; font-weight:800; margin:0; font-size:1.5rem;">350+</h4>
+                                    <h4 style="color:white; font-weight:800; margin:0; font-size:1.5rem;">{{ $statsProduk }}</h4>
                                 </div>
                             </div>
                             <div style="height:4px; background:rgba(255,255,255,0.1); border-radius:2px; overflow:hidden;">
@@ -111,20 +111,16 @@
         <div class="container">
             <div class="stats-card">
                 <div class="stat-item">
-                    <div class="stat-number">120+</div>
+                    <div class="stat-number">{{ $statsUmkm }}</div>
                     <div class="stat-label"><i class="bi bi-shop-window me-1"></i> UMKM Aktif</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">350+</div>
+                    <div class="stat-number">{{ $statsProduk }}</div>
                     <div class="stat-label"><i class="bi bi-box-seam me-1"></i> Produk Terdaftar</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">15+</div>
+                    <div class="stat-number">{{ $statsWisata }}</div>
                     <div class="stat-label"><i class="bi bi-geo-alt me-1"></i> Destinasi Wisata</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">5K+</div>
-                    <div class="stat-label"><i class="bi bi-people me-1"></i> Pengunjung/Bulan</div>
                 </div>
             </div>
         </div>
@@ -146,10 +142,10 @@
                 </a>
             </div>
 
-            <div class="row g-4">
+            <div class="d-flex flex-nowrap overflow-x-auto pb-4 gap-4 hide-scrollbar" style="scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scroll-behavior: smooth;">
                 @if(isset($produks) && $produks->isNotEmpty())
                     @foreach($produks as $produk)
-                        <div class="col-lg-3 col-md-6 reveal">
+                        <div class="col-10 col-md-5 col-lg-3 flex-shrink-0 reveal" style="scroll-snap-align: start;">
                             <div class="product-card">
                                 <div class="card-img-wrapper">
                                     <img src="{{ $produk->foto_produk ? asset('storage/' . $produk->foto_produk) : 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=400&auto=format&fit=crop' }}" alt="{{ $produk->nama_produk }}">
@@ -160,19 +156,12 @@
                                         <i class="bi bi-shop"></i> {{ $produk->umkm->nama_usaha }}
                                     </p>
                                     <h5 class="product-title">{{ $produk->nama_produk }}</h5>
-                                    <div class="product-rating">
-                                        <span class="stars">★★★★★</span>
-                                        <span>5.0 (24 Ulasan)</span>
-                                    </div>
                                     <div class="product-price">Rp {{ number_format($produk->harga, 0, ',', '.') }}</div>
                                 </div>
                                 <div class="card-footer">
                                     <div class="d-flex gap-2">
                                         <a href="/produk/{{ $produk->slug }}" class="btn-outline-primary-custom flex-fill text-center" style="font-size: 0.82rem; padding: 8px;">
-                                            <i class="bi bi-eye"></i> Detail
-                                        </a>
-                                        <a href="https://wa.me/{{ $produk->umkm->no_whatsapp }}?text=Halo%20{{ urlencode($produk->umkm->nama_usaha) }}%2C%20saya%20tertarik%20membeli%20produk%20{{ urlencode($produk->nama_produk) }}%20dengan%20harga%20Rp%20{{ number_format($produk->harga, 0, ',', '.') }}." target="_blank" class="btn-wa flex-fill" style="font-size: 0.82rem; padding: 8px; border-radius: 8px;">
-                                            <i class="bi bi-whatsapp"></i> Pesan
+                                            <i class="bi bi-eye"></i> Lihat Detail
                                         </a>
                                     </div>
                                 </div>
@@ -189,7 +178,7 @@
                         ];
                     @endphp
                     @foreach($sampleProducts as $sp)
-                        <div class="col-lg-3 col-md-6 reveal">
+                        <div class="col-10 col-md-5 col-lg-3 flex-shrink-0 reveal" style="scroll-snap-align: start;">
                             <div class="product-card">
                                 <div class="card-img-wrapper">
                                     <img src="{{ $sp['img'] }}" alt="{{ $sp['name'] }}">
@@ -198,19 +187,12 @@
                                 <div class="card-body">
                                     <p class="product-seller"><i class="bi bi-shop"></i> {{ $sp['seller'] }}</p>
                                     <h5 class="product-title">{{ $sp['name'] }}</h5>
-                                    <div class="product-rating">
-                                        <span class="stars">★★★★★</span>
-                                        <span>4.8 (18 Ulasan)</span>
-                                    </div>
                                     <div class="product-price">Rp {{ $sp['price'] }}</div>
                                 </div>
                                 <div class="card-footer">
                                     <div class="d-flex gap-2">
                                         <a href="/produk" class="btn-outline-primary-custom flex-fill text-center" style="font-size: 0.82rem; padding: 8px;">
-                                            <i class="bi bi-eye"></i> Detail
-                                        </a>
-                                        <a href="#" class="btn-wa flex-fill" style="font-size: 0.82rem; padding: 8px; border-radius: 8px;">
-                                            <i class="bi bi-whatsapp"></i> Pesan
+                                            <i class="bi bi-eye"></i> Lihat Detail
                                         </a>
                                     </div>
                                 </div>
@@ -244,28 +226,103 @@
 
             <div class="row g-3 justify-content-center">
                 @php
-                    $categories = [
-                        ['icon'=>'bi-egg-fried', 'name'=>'Kuliner & Snack', 'desc'=>'Makanan khas, keripik, & oleh-oleh lokal', 'color'=>'#0F4C81', 'bg'=>'#EBF3FA', 'href'=>'/produk?kategori=kuliner'],
-                        ['icon'=>'bi-gift-fill', 'name'=>'Kerajinan Tangan', 'desc'=>'Cinderamata khas berbahan alam lokal', 'color'=>'#1B6B3A', 'bg'=>'#E8F5E9', 'href'=>'/produk?kategori=kerajinan'],
-                        ['icon'=>'bi-flower1', 'name'=>'Pertanian & Organik', 'desc'=>'Hasil kebun segar & produk herbal', 'color'=>'#D97706', 'bg'=>'#FFFBEB', 'href'=>'/produk?kategori=pertanian'],
-                        ['icon'=>'bi-scissors', 'name'=>'Fesyen & Aksesoris', 'desc'=>'Pakaian tradisional & cinderamata batik', 'color'=>'#7C3AED', 'bg'=>'#F5F3FF', 'href'=>'/produk?kategori=fesyen'],
-                        ['icon'=>'bi-flower3', 'name'=>'Herbal & Kesehatan', 'desc'=>'Produk herbal & minuman tradisional', 'color'=>'#059669', 'bg'=>'#ECFDF5', 'href'=>'/produk?kategori=herbal'],
-                        ['icon'=>'bi-bag-check-fill', 'name'=>'Hasil Laut & Ikan', 'desc'=>'Produk olahan ikan & seafood segar', 'color'=>'#0891B2', 'bg'=>'#ECFEFF', 'href'=>'/produk?kategori=laut'],
-                    ];
+                    // Fungsi pembantu untuk menentukan icon, warna, dan deskripsi kategori berdasarkan nama/slug
+                    $mapKategori = function($name, $slug) {
+                        $nameLower = strtolower($name);
+                        $slugLower = strtolower($slug);
+                        
+                        if (str_contains($nameLower, 'makanan') || str_contains($nameLower, 'kuliner') || str_contains($nameLower, 'snack') || str_contains($nameLower, 'kue') || str_contains($slugLower, 'makanan') || str_contains($slugLower, 'kuliner')) {
+                            return [
+                                'icon' => 'bi-egg-fried',
+                                'desc' => 'Makanan khas, kuliner & cemilan lokal',
+                                'color' => '#0F4C81',
+                                'bg' => '#EBF3FA'
+                            ];
+                        }
+                        if (str_contains($nameLower, 'minuman') || str_contains($nameLower, 'jus') || str_contains($nameLower, 'kopi') || str_contains($nameLower, 'teh') || str_contains($slugLower, 'minuman') || str_contains($slugLower, 'drink')) {
+                            return [
+                                'icon' => 'bi-cup-straw',
+                                'desc' => 'Minuman segar, kopi, jus & olahan lokal',
+                                'color' => '#0891B2',
+                                'bg' => '#ECFEFF'
+                            ];
+                        }
+                        if (str_contains($nameLower, 'kerajinan') || str_contains($nameLower, 'kriya') || str_contains($nameLower, 'tangan') || str_contains($slugLower, 'kerajinan') || str_contains($slugLower, 'craft')) {
+                            return [
+                                'icon' => 'bi-gift-fill',
+                                'desc' => 'Cinderamata khas berbahan alam lokal',
+                                'color' => '#1B6B3A',
+                                'bg' => '#E8F5E9'
+                            ];
+                        }
+                        if (str_contains($nameLower, 'pertanian') || str_contains($nameLower, 'kebun') || str_contains($nameLower, 'tani') || str_contains($slugLower, 'pertanian') || str_contains($slugLower, 'tani')) {
+                            return [
+                                'icon' => 'bi-flower1',
+                                'desc' => 'Hasil kebun segar & produk pertanian',
+                                'color' => '#D97706',
+                                'bg' => '#FFFBEB'
+                            ];
+                        }
+                        if (str_contains($nameLower, 'fesyen') || str_contains($nameLower, 'fashion') || str_contains($nameLower, 'pakaian') || str_contains($nameLower, 'baju') || str_contains($nameLower, 'batik') || str_contains($slugLower, 'fesyen') || str_contains($slugLower, 'fashion')) {
+                            return [
+                                'icon' => 'bi-scissors',
+                                'desc' => 'Pakaian, batik & aksesoris fashion',
+                                'color' => '#7C3AED',
+                                'bg' => '#F5F3FF'
+                            ];
+                        }
+                        if (str_contains($nameLower, 'herbal') || str_contains($nameLower, 'kesehatan') || str_contains($nameLower, 'jamu') || str_contains($slugLower, 'herbal') || str_contains($slugLower, 'sehat')) {
+                            return [
+                                'icon' => 'bi-flower3',
+                                'desc' => 'Produk herbal & minuman tradisional',
+                                'color' => '#059669',
+                                'bg' => '#ECFDF5'
+                            ];
+                        }
+                        if (str_contains($nameLower, 'laut') || str_contains($nameLower, 'ikan') || str_contains($nameLower, 'seafood') || str_contains($slugLower, 'laut') || str_contains($slugLower, 'ikan')) {
+                            return [
+                                'icon' => 'bi-bag-check-fill',
+                                'desc' => 'Produk olahan ikan & seafood segar',
+                                'color' => '#0891B2',
+                                'bg' => '#ECFEFF'
+                            ];
+                        }
+                        
+                        // Default fallback
+                        return [
+                            'icon' => 'bi-tag-fill',
+                            'desc' => 'Berbagai macam produk UMKM pilihan',
+                            'color' => '#475569',
+                            'bg' => '#F1F5F9'
+                        ];
+                    };
                 @endphp
-                @foreach($categories as $cat)
-                    <div class="col-lg-2 col-md-4 col-6 reveal">
-                        <a href="{{ $cat['href'] }}" style="text-decoration: none;">
-                            <div class="text-center p-4" style="background: white; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: all 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 15px 40px rgba(0,0,0,0.1)'" onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.05)'">
-                                <div style="width: 60px; height: 60px; background: {{ $cat['bg'] }}; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px;">
-                                    <i class="{{ $cat['icon'] }}" style="font-size: 1.6rem; color: {{ $cat['color'] }};"></i>
+
+                @if(isset($homeKategoris) && $homeKategoris->isNotEmpty())
+                    @foreach($homeKategoris as $kategori)
+                        @php
+                            $style = $mapKategori($kategori->nama_kategori, $kategori->slug);
+                        @endphp
+                        <div class="col-lg-3 col-md-4 col-6 reveal">
+                            <a href="/produk?kategori={{ $kategori->slug }}" style="text-decoration: none;">
+                                <div class="text-center p-4" style="background: white; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: all 0.3s; cursor: pointer; h-100" onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 15px 40px rgba(0,0,0,0.1)'" onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.05)'">
+                                    <div style="width: 60px; height: 60px; background: {{ $style['bg'] }}; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px;">
+                                        <i class="bi {{ $style['icon'] }}" style="font-size: 1.6rem; color: {{ $style['color'] }};"></i>
+                                    </div>
+                                    <h6 style="font-weight: 700; color: #1E293B; font-size: 0.88rem; margin-bottom: 4px;">{{ $kategori->nama_kategori }}</h6>
+                                    <p style="font-size: 0.72rem; color: #64748B; margin: 0; line-height: 1.4;">{{ $style['desc'] }}</p>
+                                    <span class="badge bg-light text-muted mt-2" style="font-size: 0.68rem; font-weight: normal; border: 1px solid #E2E8F0;">
+                                        {{ $kategori->produk_count }} Produk
+                                    </span>
                                 </div>
-                                <h6 style="font-weight: 700; color: #1E293B; font-size: 0.88rem; margin-bottom: 4px;">{{ $cat['name'] }}</h6>
-                                <p style="font-size: 0.72rem; color: #64748B; margin: 0; line-height: 1.4;">{{ $cat['desc'] }}</p>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="col-12 text-center py-4">
+                        <p class="text-muted mb-0">Belum ada kategori produk yang terdaftar.</p>
                     </div>
-                @endforeach
+                @endif
             </div>
         </div>
     </section>
@@ -282,18 +339,6 @@
                              class="img-fluid rounded-4 w-100"
                              style="height: 400px; object-fit: cover;"
                              alt="Desa Sebong Lagoi">
-                        <!-- Floating Card -->
-                        <div style="position:absolute; bottom: 24px; left: 24px; right: 24px; background: white; border-radius: 14px; padding: 18px 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);">
-                            <div class="d-flex align-items-center gap-3">
-                                <div style="background: var(--mangrove-green); width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                                    <i class="bi bi-award-fill text-white fs-4"></i>
-                                </div>
-                                <div>
-                                    <div style="font-size:0.78rem; color:#64748B;">Desa Terbaik Kategori</div>
-                                    <div style="font-weight:800; color:#1E293B; font-size:0.95rem;">UMKM Digital Aktif 2025</div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6 reveal">
@@ -335,6 +380,7 @@
             </div>
         </div>
     </section>
+
 
     <!-- ====================================================
          POTENSI DESA SECTION (Dark Theme)
@@ -578,8 +624,55 @@
         </div>
     </section>
 
+    <!-- ====================================================
+         PETA DESA SECTION
+         ==================================================== -->
+    <section class="py-5" style="background: var(--sea-blue-light);">
+        <div class="container">
+            <div class="text-center mb-5 reveal">
+                <div class="section-tagline justify-content-center" style="color: var(--sea-blue);">
+                    <span style="width:20px; height:2px; background: var(--sea-blue); display:inline-block;"></span>
+                    Lokasi Kami
+                </div>
+                <h2 class="section-title">Peta Desa Sebong Lagoi</h2>
+                <p class="section-subtitle mx-auto mt-2">Jelajahi letak geografis dan batas wilayah Desa Sebong Lagoi melalui peta di bawah ini.</p>
+            </div>
+            
+            <div class="row justify-content-center reveal">
+                <div class="col-lg-10">
+                    <div style="background: white; padding: 15px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+                        <!-- Pastikan Anda meletakkan gambar peta Anda di folder public/images dengan nama peta-desa.jpg -->
+                        <img src="{{ asset('images/peta-desa.jpg') }}" 
+                             onerror="this.src='https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1000&auto=format&fit=crop'" 
+                             alt="Peta Desa Sebong Lagoi" 
+                             class="img-fluid rounded-4 w-100" 
+                             style="max-height: 600px; object-fit: contain; cursor: pointer;"
+                             data-bs-toggle="modal" data-bs-target="#petaModal">
+                    </div>
+                    <div class="text-center mt-3">
+                        <small class="text-muted"><i class="bi bi-info-circle"></i> Klik gambar peta untuk memperbesar.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-
-
+    <!-- Modal Peta -->
+    <div class="modal fade" id="petaModal" tabindex="-1" aria-labelledby="petaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content border-0 bg-transparent">
+                <div class="modal-header border-0 d-flex justify-content-end pb-0">
+                    <button type="button" class="btn-close btn-close-white fs-4" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1); background-color: rgba(255,255,255,0.8); border-radius: 50%; padding: 10px; opacity: 1;"></button>
+                </div>
+                <div class="modal-body text-center pt-0">
+                    <img src="{{ asset('images/peta-desa.jpg') }}" 
+                         onerror="this.src='https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1200&auto=format&fit=crop'" 
+                         alt="Peta Desa Sebong Lagoi" 
+                         class="img-fluid rounded-3 shadow-lg"
+                         style="max-height: 85vh;">
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection

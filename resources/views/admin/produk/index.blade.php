@@ -20,7 +20,6 @@
                             <th>UMKM Pemilik</th>
                             <th>Kategori</th>
                             <th>Harga</th>
-                            <th>Stok</th>
                             <th class="pe-4 text-end">Aksi</th>
                         </tr>
                     </thead>
@@ -39,9 +38,6 @@
                                 <td><span class="fw-medium text-dark">{{ $item->umkm->nama_usaha }}</span></td>
                                 <td><span class="badge bg-secondary-custom small">{{ $item->kategori->nama_kategori }}</span></td>
                                 <td class="fw-bold text-primary-custom">Rp {{ number_format($item->harga, 0, ',', '.') }}</td>
-                                <td>
-                                    <span class="badge {{ $item->stok > 0 ? 'bg-success' : 'bg-danger' }} small">{{ $item->stok }}</span>
-                                </td>
                                 <td class="pe-4 text-end">
                                     <div class="d-inline-flex gap-2">
                                         <a href="{{ route('produk.show', $item->slug) }}" target="_blank" class="btn btn-outline-info btn-sm px-2" style="border-radius: 6px;" title="Lihat di Publik"><i class="bi bi-eye"></i></a>

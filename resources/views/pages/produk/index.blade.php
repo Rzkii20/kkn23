@@ -19,33 +19,12 @@
         </div>
     </div>
 
-    {{-- ===== INFO BANNER: CARA PEMESANAN ===== --}}
+    {{-- ===== INFO BANNER: KATALOG SAJA ===== --}}
     <div class="bg-white border-bottom py-3">
         <div class="container">
-            <div class="d-flex align-items-center justify-content-center gap-3 flex-wrap text-center">
-                <div class="d-flex align-items-center gap-2 text-muted small">
-                    <div class="rounded-circle d-flex align-items-center justify-content-center" style="width:28px;height:28px;background:#f0fdf4;">
-                        <i class="bi bi-eye" style="color:#16a34a;font-size:0.75rem;"></i>
-                    </div>
-                    <span><strong>1.</strong> Lihat produk pilihan Anda</span>
-                </div>
-                <i class="bi bi-chevron-right text-muted d-none d-md-inline"></i>
-                <div class="d-flex align-items-center gap-2 text-muted small">
-                    <div class="rounded-circle d-flex align-items-center justify-content-center" style="width:28px;height:28px;background:#f0fdf4;">
-                        <i class="bi bi-info-circle" style="color:#16a34a;font-size:0.75rem;"></i>
-                    </div>
-                    <span><strong>2.</strong> Buka detail & hubungi penjual</span>
-                </div>
-                <i class="bi bi-chevron-right text-muted d-none d-md-inline"></i>
-                <div class="d-flex align-items-center gap-2 text-muted small">
-                    <div class="rounded-circle d-flex align-items-center justify-content-center" style="width:28px;height:28px;background:#dcfce7;">
-                        <i class="bi bi-whatsapp" style="color:#16a34a;font-size:0.75rem;"></i>
-                    </div>
-                    <span><strong>3.</strong> Pesan langsung via <strong class="text-success">WhatsApp</strong></span>
-                </div>
-                <span class="ms-md-3 badge text-bg-light border small" style="border-radius:20px;">
-                    <i class="bi bi-shield-check text-success me-1"></i>Tidak ada pemesanan online
-                </span>
+            <div class="d-flex align-items-center justify-content-center gap-2 text-muted small">
+                <i class="bi bi-info-circle-fill" style="color:#16a34a;"></i>
+                <span>Katalog ini hanya untuk <strong>melihat informasi produk</strong>. Tidak tersedia pemesanan online.</span>
             </div>
         </div>
     </div>
@@ -99,11 +78,7 @@
                                 <span class="badge bg-secondary-custom position-absolute top-0 end-0 m-3 px-2 py-1" style="border-radius: 20px; font-size: 0.7rem;">
                                     {{ $produk->kategori->nama_kategori }}
                                 </span>
-                                @if($produk->stok == 0)
-                                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style="background: rgba(0,0,0,0.45);">
-                                        <span class="badge bg-danger px-3 py-2" style="border-radius:20px; font-size:0.85rem;">Stok Habis</span>
-                                    </div>
-                                @endif
+
                             </div>
                             <div class="card-body p-4 d-flex flex-column">
                                 <p class="small text-muted mb-1">
@@ -113,30 +88,18 @@
                                 <h6 class="fw-bold text-primary-custom mb-2">Rp {{ number_format($produk->harga, 0, ',', '.') }}</h6>
                                 <p class="text-muted small flex-grow-1">{{ Str::limit($produk->deskripsi, 70) }}</p>
                                 <div class="d-flex align-items-center gap-2 mt-1">
-                                    <span class="badge {{ $produk->stok > 0 ? 'bg-success' : 'bg-secondary' }} small">
-                                        {{ $produk->stok > 0 ? 'Tersedia' : 'Habis' }}
-                                    </span>
                                     <span class="text-muted small"><i class="bi bi-eye me-1"></i>{{ $produk->views }}</span>
+                                    @if($produk->ukuran_kemasan)
+                                        <span class="text-muted small"><i class="bi bi-box-seam ms-2 me-1"></i>{{ $produk->ukuran_kemasan }}</span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="card-footer bg-white border-0 p-4 pt-0 d-flex gap-2">
+                            <div class="card-footer bg-white border-0 p-4 pt-0">
                                 <a href="{{ route('produk.show', $produk->slug) }}"
-                                    class="btn btn-outline-secondary btn-sm w-50"
+                                    class="btn btn-outline-secondary btn-sm w-100"
                                     style="border-radius: 8px;">
-                                    <i class="bi bi-info-circle me-1"></i>Detail
+                                    <i class="bi bi-info-circle me-1"></i>Lihat Detail
                                 </a>
-                                @if($produk->stok > 0)
-                                    <a href="https://wa.me/{{ $produk->umkm->no_whatsapp }}?text=Halo%20{{ urlencode($produk->umkm->nama_usaha) }}%2C%20saya%20tertarik%20dengan%20produk%20%22{{ urlencode($produk->nama_produk) }}%22.%20Boleh%20saya%20tanya%20informasi%20lebih%20lanjut%3F"
-                                        target="_blank"
-                                        class="btn btn-sm w-50 text-white fw-semibold"
-                                        style="border-radius: 8px; background-color: #25D366; border-color: #25D366;">
-                                        <i class="bi bi-whatsapp"></i> Tanya WA
-                                    </a>
-                                @else
-                                    <button class="btn btn-sm w-50 btn-secondary" disabled style="border-radius: 8px; opacity:0.5; cursor:not-allowed;">
-                                        Stok Habis
-                                    </button>
-                                @endif
                             </div>
                         </div>
                     </div>

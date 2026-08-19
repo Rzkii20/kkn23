@@ -38,9 +38,6 @@ class UmkmController extends Controller
         // Fetch products associated with this UMKM
         $produks = $umkm->produk()->with('kategori')->latest()->get();
 
-        // Generate QR Code URL dynamically using qrserver API pointing to this page's route
-        $qrCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" . urlencode(route('umkm.show', $umkm->slug));
-
-        return view('pages.umkm.show', compact('umkm', 'produks', 'qrCodeUrl'));
+        return view('pages.umkm.show', compact('umkm', 'produks'));
     }
 }

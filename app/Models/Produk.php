@@ -26,7 +26,7 @@ class Produk extends Model
         'slug',
         'deskripsi',
         'harga',
-        'stok',
+        'ukuran_kemasan',
         'foto_produk',
         'views',
         'clicks_whatsapp',
@@ -39,7 +39,6 @@ class Produk extends Model
      */
     protected $casts = [
         'harga' => 'decimal:2',
-        'stok' => 'integer',
         'views' => 'integer',
         'clicks_whatsapp' => 'integer',
     ];

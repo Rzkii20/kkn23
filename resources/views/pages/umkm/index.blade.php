@@ -4,7 +4,7 @@
 
 @section('content')
     <!-- HEADER COVER -->
-    <div class="py-5 text-white" style="background: linear-gradient(135deg, var(--sea-blue) 0%, var(--mangrove-green) 100%);">
+    <div class="py-5 text-white position-relative" style="background: linear-gradient(rgba(0, 48, 73, 0.7), rgba(0, 48, 73, 0.7)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2000&auto=format&fit=crop') no-repeat center center; background-size: cover;">
         <div class="container text-center py-3">
             <h1 class="display-5 fw-bold mb-2">Daftar Mitra UMKM</h1>
             <p class="lead text-white-50">Dukung Perekonomian Lokal dengan Berbelanja Produk Terbaik Asli Desa</p>

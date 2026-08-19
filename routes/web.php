@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VillageController;
+use App\Http\Controllers\Admin\PengaturanController;
 use Illuminate\Support\Facades\Route;
 
 // Halaman Utama / Landing Page
@@ -97,4 +98,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/profil-desa', function () {
         return redirect('/tentang-desa');
     })->name('profil-desa');
+
+    // Pengaturan Akun Admin
+    Route::get('/pengaturan', [PengaturanController::class, 'edit'])->name('pengaturan.edit');
+    Route::put('/pengaturan/profil', [PengaturanController::class, 'updateProfil'])->name('pengaturan.profil');
+    Route::put('/pengaturan/password', [PengaturanController::class, 'updatePassword'])->name('pengaturan.password');
+    Route::delete('/pengaturan/hapus-foto', [PengaturanController::class, 'hapusFoto'])->name('pengaturan.hapus-foto');
 });

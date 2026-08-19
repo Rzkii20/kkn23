@@ -34,7 +34,6 @@
                     {{-- Stats --}}
                     <div class="d-flex gap-3 mt-3 text-muted small">
                         <span><i class="bi bi-eye me-1"></i>{{ $produk->views }} kali dilihat</span>
-                        <span><i class="bi bi-whatsapp me-1 text-success"></i>{{ $produk->clicks_whatsapp }} hubungi penjual</span>
                     </div>
                 </div>
 
@@ -46,13 +45,9 @@
                         <span class="badge bg-secondary-custom px-3 py-2" style="border-radius: 20px;">
                             {{ $produk->kategori->nama_kategori }}
                         </span>
-                        @if($produk->stok > 0)
-                            <span class="badge bg-success px-3 py-2" style="border-radius: 20px;">
-                                <i class="bi bi-check-circle me-1"></i>Tersedia (Stok: {{ $produk->stok }})
-                            </span>
-                        @else
-                            <span class="badge bg-danger px-3 py-2" style="border-radius: 20px;">
-                                <i class="bi bi-x-circle me-1"></i>Stok Habis
+                        @if($produk->ukuran_kemasan)
+                            <span class="badge bg-light text-dark border px-3 py-2" style="border-radius: 20px;">
+                                <i class="bi bi-box-seam me-1"></i> {{ $produk->ukuran_kemasan }}
                             </span>
                         @endif
                     </div>
@@ -76,7 +71,7 @@
                         </a>
                     </div>
 
-                    {{-- ===== CARA PEMESANAN BOX ===== --}}
+                    {{-- ===== INFO KATALOG ===== --}}
                     <div class="alert border-0 mb-4 p-4" style="background: #f0fdf4; border-radius: 14px;">
                         <div class="d-flex align-items-start gap-3">
                             <div class="flex-shrink-0 rounded-circle d-flex align-items-center justify-content-center"
@@ -84,11 +79,11 @@
                                 <i class="bi bi-info-circle-fill" style="color:#16a34a;"></i>
                             </div>
                             <div>
-                                <p class="fw-bold text-dark mb-1" style="font-size: 0.9rem;">Cara Mendapatkan Produk Ini</p>
+                                <p class="fw-bold text-dark mb-1" style="font-size: 0.9rem;">Informasi Produk</p>
                                 <p class="text-muted small mb-0">
-                                    Produk ini <strong>tidak dapat dipesan langsung</strong> melalui website.
-                                    Klik tombol di bawah untuk menghubungi penjual via <strong class="text-success">WhatsApp</strong>,
-                                    lalu diskusikan ketersediaan, pengiriman, dan pembayaran langsung dengan penjual.
+                                    Katalog ini hanya untuk <strong>melihat informasi produk</strong>.
+                                    Tidak tersedia pemesanan online melalui website ini.
+                                    Untuk informasi lebih lanjut, silakan kunjungi toko UMKM secara langsung.
                                 </p>
                             </div>
                         </div>
@@ -96,27 +91,18 @@
 
                     {{-- ===== TOMBOL AKSI ===== --}}
                     <div class="d-flex flex-wrap gap-3">
-                        @if($produk->stok > 0)
-                            <a href="https://wa.me/{{ $produk->umkm->no_whatsapp }}?text=Halo%20{{ urlencode($produk->umkm->nama_usaha) }}%2C%20saya%20tertarik%20dengan%20produk%20%22{{ urlencode($produk->nama_produk) }}%22%20seharga%20Rp%20{{ number_format($produk->harga, 0, ',', '.') }}.%20Apakah%20masih%20tersedia%3F"
-                                target="_blank"
-                                onclick="fetch('/produk-click/{{ $produk->id }}')"
-                                class="btn btn-lg py-3 px-4 text-white fw-bold flex-grow-1"
-                                style="background-color: #25D366; border-color: #25D366; border-radius: 12px; max-width: 320px;">
-                                <i class="bi bi-whatsapp fs-5 me-2"></i>Hubungi Penjual via WhatsApp
-                            </a>
-                        @else
-                            <button class="btn btn-lg py-3 px-4 btn-secondary fw-bold flex-grow-1"
-                                style="border-radius: 12px; max-width: 320px; opacity:0.65; cursor:not-allowed;" disabled>
-                                <i class="bi bi-x-circle me-2"></i>Stok Sedang Habis
-                            </button>
-                        @endif
                         <button onclick="navigator.share
                                 ? navigator.share({title:'{{ $produk->nama_produk }}', url: window.location.href})
                                 : navigator.clipboard.writeText(window.location.href).then(() => alert('Tautan disalin!'))"
                             class="btn btn-lg btn-outline-secondary py-3 px-4"
                             style="border-radius: 12px;" title="Bagikan produk ini">
-                            <i class="bi bi-share fs-5"></i>
+                            <i class="bi bi-share fs-5 me-2"></i>Bagikan Produk
                         </button>
+                        <a href="{{ route('produk.index') }}"
+                            class="btn btn-lg btn-outline-primary py-3 px-4"
+                            style="border-radius: 12px;">
+                            <i class="bi bi-arrow-left me-2"></i>Kembali ke Katalog
+                        </a>
                     </div>
 
                 </div>

@@ -4,7 +4,7 @@
 
 @section('content')
     <!-- Hero Section -->
-    <div class="py-5 text-white position-relative" style="background: linear-gradient(rgba(0, 48, 73, 0.7), rgba(0, 48, 73, 0.7)), url('https://images.unsplash.com/photo-1596404981142-9c3f15006b52?q=80&w=2000&auto=format&fit=crop') no-repeat center center; background-size: cover;">
+    <div class="py-5 text-white position-relative" style="background: linear-gradient(rgba(0, 48, 73, 0.7), rgba(0, 48, 73, 0.7)), url('https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?q=80&w=2000&auto=format&fit=crop') no-repeat center center; background-size: cover;">
         <div class="container text-center py-5">
             <h1 class="display-4 fw-bold mb-3">Pesona Alam Sebong Lagoi</h1>
             <p class="lead mb-0 text-white-50 mx-auto" style="max-width: 700px;">Jelajahi berbagai destinasi wisata menarik yang menawarkan keindahan alam, budaya, dan pengalaman tak terlupakan.</p>

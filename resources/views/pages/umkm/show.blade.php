@@ -58,13 +58,10 @@
                         </div>
                     </div>
                     
-                    <div class="d-flex gap-2">
-                        <a href="https://wa.me/{{ $umkm->no_whatsapp }}?text=Halo%20{{ urlencode($umkm->nama_usaha) }}%2C%20saya%20ingin%20bertanya%20mengenai%20produk%20Anda." target="_blank" class="btn btn-success px-4 py-2" style="background-color: #25D366; border-color: #25D366; border-radius: 8px;">
+                    <div class="d-flex flex-column flex-lg-row gap-2">
+                        <a href="https://wa.me/{{ $umkm->no_whatsapp }}?text=Halo%20{{ urlencode($umkm->nama_usaha) }}%2C%20saya%20ingin%20bertanya%20mengenai%20produk%20Anda." target="_blank" class="btn btn-success w-100 w-lg-auto px-4 py-2" style="background-color: #25D366; border-color: #25D366; border-radius: 8px;">
                             <i class="bi bi-chat-left-text me-2"></i> Hubungi via WhatsApp
                         </a>
-                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#qrModal" style="border-radius: 8px;">
-                            <i class="bi bi-qr-code me-2"></i> Scan QR Code Toko
-                        </button>
                     </div>
                 </div>
             </div>
@@ -79,10 +76,10 @@
                 <div class="col-lg-8">
                     <h3 class="fw-bold mb-4" style="color: var(--sea-blue-dark);"><i class="bi bi-box-seam-fill text-primary-custom me-2"></i> Katalog Produk Usaha</h3>
                     
-                    <div class="row g-4">
+                    <div class="d-flex flex-nowrap overflow-x-auto pb-4 gap-4 hide-scrollbar" style="scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scroll-behavior: smooth;">
                         @if($produks->isNotEmpty())
                             @foreach($produks as $produk)
-                                <div class="col-md-6">
+                                <div class="col-10 col-md-6 col-lg-5 flex-shrink-0" style="scroll-snap-align: start;">
                                     <div class="card card-custom h-100 border-0 shadow-sm">
                                         <div class="position-relative">
                                             <img src="{{ $produk->foto_produk ? asset('storage/' . $produk->foto_produk) : 'https://placehold.co/400x300/png?text=' . urlencode($produk->nama_produk) }}" class="card-img-top" alt="{{ $produk->nama_produk }}">
@@ -95,17 +92,14 @@
                                             <h6 class="fw-bold text-primary-custom mb-3">Rp {{ number_format($produk->harga, 0, ',', '.') }}</h6>
                                             <p class="card-text text-muted small flex-grow-1">{{ Str::limit($produk->deskripsi, 85) }}</p>
                                         </div>
-                                        <div class="card-footer bg-white border-0 p-4 pt-0 d-flex gap-2">
-                                            <a href="/produk/{{ $produk->slug }}" class="btn btn-outline-secondary w-50 btn-sm" style="border-radius: 8px;">Detail</a>
-                                            <a href="https://wa.me/{{ $umkm->no_whatsapp }}?text=Halo%20{{ urlencode($umkm->nama_usaha) }}%2C%20saya%20tertarik%20membeli%20produk%20{{ urlencode($produk->nama_produk) }}%20dengan%20harga%20Rp%20{{ number_format($produk->harga, 0, ',', '.') }}." target="_blank" class="btn btn-success w-50 btn-sm" style="border-radius: 8px; background-color: #25D366; border-color: #25D366;">
-                                                <i class="bi bi-whatsapp"></i> Pesan WA
-                                            </a>
+                                        <div class="card-footer bg-white border-0 p-4 pt-0">
+                                            <a href="/produk/{{ $produk->slug }}" class="btn btn-outline-secondary w-100 btn-sm" style="border-radius: 8px;"><i class="bi bi-info-circle me-1"></i>Lihat Detail</a>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
                         @else
-                            <div class="col-12 text-center py-5 bg-white rounded-3 shadow-sm">
+                            <div class="col-12 w-100 text-center py-5 bg-white rounded-3 shadow-sm">
                                 <div class="fs-1 text-muted"><i class="bi bi-box"></i></div>
                                 <h5 class="fw-bold text-muted mt-3">Belum Ada Produk Terdaftar</h5>
                                 <p class="text-muted small">Mitra ini belum menambahkan katalog produk dagangannya.</p>
@@ -136,24 +130,7 @@
         </div>
     </section>
 
-    <!-- QR CODE MODAL -->
-    <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-sm">
-            <div class="modal-content border-0" style="border-radius: 16px;">
-                <div class="modal-header border-0 pb-0">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center pt-0">
-                    <h5 class="modal-title fw-bold mb-3" id="qrModalLabel">QR Code Profil Toko</h5>
-                    <img src="{{ $qrCodeUrl }}" class="img-fluid rounded border p-2 mb-3 bg-light shadow-sm" alt="QR Code {{ $umkm->nama_usaha }}">
-                    <p class="text-muted small mb-3">Pindai kode QR di atas menggunakan kamera ponsel untuk mengakses cepat profil toko.</p>
-                    <a href="{{ $qrCodeUrl }}" target="_blank" download="{{ $umkm->slug }}-qrcode.png" class="btn btn-primary-custom btn-sm w-100" style="border-radius: 6px;">
-                        <i class="bi bi-download me-2"></i> Unduh Gambar QR
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+
 @endsection
 
 @section('scripts')

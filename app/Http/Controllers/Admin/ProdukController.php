@@ -43,7 +43,7 @@ class ProdukController extends Controller
             'slug' => Str::slug($validated['nama_produk']) . '-' . rand(1000, 9999),
             'deskripsi' => $validated['deskripsi'],
             'harga' => $validated['harga'],
-            'stok' => $validated['stok'],
+            'ukuran_kemasan' => $validated['ukuran_kemasan'] ?? null,
             'foto_produk' => $fotoPath,
         ]);
 
@@ -74,7 +74,7 @@ class ProdukController extends Controller
             'nama_produk' => $validated['nama_produk'],
             'deskripsi' => $validated['deskripsi'],
             'harga' => $validated['harga'],
-            'stok' => $validated['stok'],
+            'ukuran_kemasan' => $validated['ukuran_kemasan'] ?? null,
             'foto_produk' => $fotoPath,
         ]);
 

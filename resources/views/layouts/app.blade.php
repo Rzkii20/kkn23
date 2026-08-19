@@ -21,12 +21,21 @@
          NAVBAR UTAMA
          ==================================================== -->
     <nav class="navbar navbar-expand-lg navbar-custom {{ !Route::is('home') ? 'navbar-solid' : '' }}" id="mainNavbar">
+        @php
+            $logoAdmin = \App\Models\User::where('role', 'admin')->value('foto_profil');
+        @endphp
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <div class="navbar-brand-logo">SL</div>
+                @if($logoAdmin)
+                    <img src="{{ asset('storage/' . $logoAdmin) }}"
+                         alt="Logo Desa"
+                         style="width:44px;height:44px;object-fit:cover;border-radius:10px;flex-shrink:0;">
+                @else
+                    <div class="navbar-brand-logo">SL</div>
+                @endif
                 <div class="navbar-brand-text">
                     <span class="brand-name">Desa Sebong Lagoi</span>
-                    <span class="brand-sub">Sistem UMKM & Potensi Desa</span>
+                    <span class="brand-sub">Informasi UMKM &amp; Potensi Desa</span>
                 </div>
             </a>
 
@@ -79,7 +88,8 @@
                     @auth
                         <li class="nav-item dropdown">
                             <a class="btn-admin-nav dropdown-toggle" href="#" id="navbarUser" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-person-circle"></i> {{ Auth::user()->name }}
+                                <i class="bi bi-person-circle"></i>
+                                {{ Auth::user()->isAdmin() ? 'Admin' : Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg" aria-labelledby="navbarUser">
                                 <li class="px-3 py-2">

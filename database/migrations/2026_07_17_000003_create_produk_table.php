@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('deskripsi');
             $table->decimal('harga', 12, 2);
-            $table->integer('stok')->default(0);
+
             $table->string('foto_produk')->nullable();
             $table->integer('views')->default(0);
             $table->integer('clicks_whatsapp')->default(0);

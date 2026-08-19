@@ -66,8 +66,8 @@
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="stok" class="form-label fw-medium text-dark">Jumlah Stok <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" id="stok" name="stok" value="{{ old('stok', 0) }}" min="0" required>
+                                <label for="ukuran_kemasan" class="form-label fw-medium text-dark">Ukuran / Kemasan <span class="text-muted fw-normal small">(Opsional)</span></label>
+                                <input type="text" class="form-control" id="ukuran_kemasan" name="ukuran_kemasan" value="{{ old('ukuran_kemasan') }}" placeholder="Contoh: 500 gram, 1 Liter, Botol Kecil">
                             </div>
                         </div>
 

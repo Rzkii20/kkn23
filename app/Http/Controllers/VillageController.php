@@ -14,11 +14,26 @@ class VillageController extends Controller
         return view('pages.about');
     }
 
-    /**
-     * Display the 'Village Potential' page.
-     */
     public function potential(): View
     {
-        return view('pages.potential');
+        $mangrove = \App\Models\Wisata::where('nama_wisata', 'like', '%mangrove%')
+            ->whereNotNull('foto_wisata')
+            ->first();
+
+        $hasilLaut = \App\Models\Produk::where(function($q) {
+            $q->where('nama_produk', 'like', '%ikan%')
+              ->orWhere('nama_produk', 'like', '%laut%')
+              ->orWhere('nama_produk', 'like', '%udang%')
+              ->orWhere('nama_produk', 'like', '%kepiting%')
+              ->orWhere('nama_produk', 'like', '%otak%');
+        })->whereNotNull('foto_produk')->first();
+
+        $kerajinan = \App\Models\Produk::whereHas('kategori', function($q) {
+            $q->where('nama_kategori', 'like', '%kerajinan%')
+              ->orWhere('nama_kategori', 'like', '%kriya%')
+              ->orWhere('nama_kategori', 'like', '%tangan%');
+        })->whereNotNull('foto_produk')->first();
+
+        return view('pages.potential', compact('mangrove', 'hasilLaut', 'kerajinan'));
     }
 }

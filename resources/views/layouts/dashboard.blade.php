@@ -72,6 +72,9 @@
                     <a class="nav-link {{ Request::is('admin/pesan*') ? 'active' : '' }}" href="{{ route('admin.pesan.index') }}">
                         <i class="bi bi-envelope-open-fill"></i> Pesan Masuk
                     </a>
+                    <a class="nav-link {{ Request::is('admin/pengaturan*') ? 'active' : '' }}" href="{{ route('admin.pengaturan.edit') }}">
+                        <i class="bi bi-gear-fill"></i> Pengaturan Akun
+                    </a>
                 @else
                     <!-- Pemilik UMKM Sidebar Links -->
                     <a class="nav-link {{ Request::is('mitra/dashboard') ? 'active' : '' }}" href="{{ route('mitra.dashboard') }}">
@@ -113,8 +116,12 @@
                     </div>
                     
                     <div class="dropdown">
-                        <a class="btn bg-white border rounded-circle p-2 d-flex align-items-center justify-content-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="width: 42px; height: 42px;">
-                            <i class="bi bi-person text-dark fs-5"></i>
+                        <a class="btn bg-white border rounded-circle p-0 d-flex align-items-center justify-content-center overflow-hidden" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="width: 42px; height: 42px;">
+                            @if(Auth::user()->foto_profil)
+                                <img src="{{ asset('storage/' . Auth::user()->foto_profil) }}" alt="Foto" style="width:42px;height:42px;object-fit:cover;">
+                            @else
+                                <i class="bi bi-person text-dark fs-5"></i>
+                            @endif
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg mt-2">
                             <li class="p-2 d-md-none text-center">
@@ -122,6 +129,12 @@
                                 <span class="badge bg-danger small" style="font-size: 0.7rem;">Administrator</span>
                                 <hr class="my-2">
                             </li>
+                            <li>
+                                <a class="dropdown-item py-2" href="{{ route('admin.pengaturan.edit') }}">
+                                    <i class="bi bi-gear me-2 text-muted"></i> Pengaturan Akun
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider m-0"></li>
                             <li>
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
@@ -152,6 +165,7 @@
                         <a class="nav-link text-white py-2" href="{{ route('admin.slider.index') }}"><i class="bi bi-card-image me-2"></i> Slider Banner</a>
                         <a class="nav-link text-white py-2" href="{{ route('admin.faq.index') }}"><i class="bi bi-question-circle-fill me-2"></i> FAQ</a>
                         <a class="nav-link text-white py-2" href="{{ route('admin.pesan.index') }}"><i class="bi bi-envelope-open-fill me-2"></i> Pesan Masuk</a>
+                        <a class="nav-link text-white py-2" href="{{ route('admin.pengaturan.edit') }}"><i class="bi bi-gear-fill me-2"></i> Pengaturan Akun</a>
                     @else
                         <a class="nav-link text-white py-2" href="{{ route('mitra.dashboard') }}"><i class="bi bi-grid-fill me-2"></i> Dashboard</a>
                         <a class="nav-link text-white py-2" href="{{ route('mitra.profil.edit') }}"><i class="bi bi-shop-window me-2"></i> Profil Usaha</a>
