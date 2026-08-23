@@ -50,6 +50,25 @@ try {
     $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
     echo "✅ HTTP Kernel resolved.\n\n";
 
+    // Reflect and print global middleware
+    try {
+        $reflector = new ReflectionClass(get_class($kernel));
+        if ($reflector->hasProperty('middleware')) {
+            $property = $reflector->getProperty('middleware');
+            $property->setAccessible(true);
+            $middleware = $property->getValue($kernel);
+            echo "Global Middleware found: " . count($middleware) . "\n";
+            foreach ($middleware as $index => $mw) {
+                echo "  - [" . $index . "] " . $mw . "\n";
+            }
+        } else {
+            echo "No global middleware property found on kernel class.\n";
+        }
+    } catch (\Exception $refErr) {
+        echo "Reflection failed: " . $refErr->getMessage() . "\n";
+    }
+    echo "\n";
+
     echo "[4/4] Handling Simulated GET Request to '/'...\n";
     $request = Illuminate\Http\Request::create('/', 'GET');
     
