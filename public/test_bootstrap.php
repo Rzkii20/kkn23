@@ -9,6 +9,20 @@ echo "=========================================\n";
 echo "🛠️ Laravel HTTP Bootstrapping Diagnostic\n";
 echo "=========================================\n\n";
 
+// Register shutdown function to catch fatal errors
+register_shutdown_function(function() {
+    $error = error_get_last();
+    if ($error !== null) {
+        echo "\n\n❌ FATAL ERROR CAUGHT IN SHUTDOWN FUNCTION:\n";
+        echo "Type: " . $error['type'] . "\n";
+        echo "Message: " . $error['message'] . "\n";
+        echo "File: " . $error['file'] . "\n";
+        echo "Line: " . $error['line'] . "\n";
+    } else {
+        echo "\n\n[Shutdown] Script execution stopped. If the output above is incomplete, the process may have been killed by the server.\n";
+    }
+});
+
 try {
     echo "[1/4] Loading autoload.php...\n";
     require __DIR__.'/../vendor/autoload.php';
