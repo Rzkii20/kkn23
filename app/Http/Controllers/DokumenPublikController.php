@@ -6,7 +6,7 @@ use App\Models\Dokumen;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class DokumenController extends Controller
+class DokumenPublikController extends Controller
 {
     public function index(Request $request): View
     {
