@@ -70,15 +70,11 @@
                                 </div>
                             </div>
                             @if($user->foto_profil)
-                                <form action="{{ route('admin.pengaturan.hapus-foto') }}" method="POST" class="m-0">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-danger btn-sm"
-                                        onclick="return confirm('Hapus foto profil?')"
-                                        title="Hapus foto">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </form>
+                                <button type="submit" form="form-hapus-foto" class="btn btn-outline-danger btn-sm"
+                                    onclick="return confirm('Hapus foto profil?')"
+                                    title="Hapus foto">
+                                    <i class="bi bi-trash"></i>
+                                </button>
                             @endif
                         </div>
                     </div>
@@ -113,6 +109,13 @@
                         <i class="bi bi-save me-2"></i>Simpan Perubahan
                     </button>
                 </form>
+
+                @if($user->foto_profil)
+                    <form id="form-hapus-foto" action="{{ route('admin.pengaturan.hapus-foto') }}" method="POST" class="d-none">
+                        @csrf
+                        @method('DELETE')
+                    </form>
+                @endif
             </div>
         </div>
 

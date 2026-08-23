@@ -24,7 +24,7 @@
                 <div class="col-lg-7">
                     <div class="hero-badge animate-fade-in">
                         <i class="bi bi-star-fill"></i>
-                        Potensi Desa Sebong Lagoi — Bintan
+                        Desa Sebong Lagoi — Bintan
                     </div>
 
                     <h1 class="hero-title animate-fade-in-delay-1">
@@ -382,51 +382,6 @@
     </section>
 
 
-    <!-- ====================================================
-         POTENSI DESA SECTION (Dark Theme)
-         ==================================================== -->
-    <section class="potensi-section py-5">
-        <div class="container py-4">
-            <div class="row align-items-center g-5">
-                <div class="col-lg-5 reveal">
-                    <div class="section-tagline">Keunggulan Desa</div>
-                    <h2 class="section-title text-white">Potensi &<br>Keunggulan Desa</h2>
-                    <p style="color: rgba(255,255,255,0.6); margin-top: 16px; line-height: 1.8;">
-                        Desa Sebong Lagoi memiliki berbagai potensi yang mendukung pertumbuhan ekonomi dan pariwisata berkelanjutan.
-                    </p>
-                    <div class="mt-4">
-                        <a href="/potensi-desa" class="btn-gold">
-                            <i class="bi bi-arrow-right-circle"></i> Jelajahi Potensi Desa
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-7 reveal">
-                    <div class="row g-3">
-                        @php
-                            $potensi = [
-                                ['icon'=>'🌊', 'title'=>'Wisata Bahari', 'desc'=>'Pantai pasir putih dan snorkeling spot yang memukau'],
-                                ['icon'=>'🌿', 'title'=>'Hutan Mangrove', 'desc'=>'Kawasan mangrove terluas dengan ekosistem yang terjaga'],
-                                ['icon'=>'🍜', 'title'=>'Kuliner Lokal', 'desc'=>'Aneka makanan khas Melayu dan seafood segar'],
-                                ['icon'=>'🏺', 'title'=>'Kerajinan Tradisional', 'desc'=>'Kain tenun, anyaman pandan, dan batik Melayu'],
-                                ['icon'=>'🌱', 'title'=>'Pertanian Organik', 'desc'=>'Hasil kebun segar dan produk herbal tradisional'],
-                                ['icon'=>'📡', 'title'=>'Digitalisasi UMKM', 'desc'=>'Platform digital untuk kemajuan ekonomi lokal'],
-                            ];
-                        @endphp
-                        @foreach($potensi as $item)
-                            <div class="col-md-4 col-6">
-                                <div class="potensi-item">
-                                    <span class="potensi-icon">{{ $item['icon'] }}</span>
-                                    <h5>{{ $item['title'] }}</h5>
-                                    <p>{{ $item['desc'] }}</p>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- ====================================================
          DESTINASI WISATA SECTION

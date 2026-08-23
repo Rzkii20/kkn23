@@ -48,14 +48,8 @@
                     <li class="nav-item">
                         <a class="nav-link {{ Route::is('home') ? 'active' : '' }}" href="{{ route('home') }}">Beranda</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarProfil" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Profil Desa
-                        </a>
-                        <ul class="dropdown-menu border-0 shadow" aria-labelledby="navbarProfil">
-                            <li><a class="dropdown-item" href="/tentang-desa">Tentang Desa</a></li>
-                            <li><a class="dropdown-item" href="/potensi-desa">Potensi Desa</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::is('tentang-desa') ? 'active' : '' }}" href="/tentang-desa">Tentang Desa</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarUmkm" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -111,12 +105,6 @@
                                     </form>
                                 </li>
                             </ul>
-                        </li>
-                    @else
-                        <li class="nav-item">
-                            <a class="btn-admin-nav" href="{{ route('login') }}">
-                                <i class="bi bi-box-arrow-in-right"></i> Admin
-                            </a>
                         </li>
                     @endauth
                 </ul>
@@ -219,6 +207,7 @@
                     <a href="#">Kebijakan Privasi</a>
                     <a href="#">Syarat & Ketentuan</a>
                     <a href="/kontak">Bantuan</a>
+                    <a href="{{ route('login') }}" style="opacity: 0.7;"><i class="bi bi-person-fill-lock"></i> Login Admin</a>
                 </div>
             </div>
         </div>
