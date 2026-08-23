@@ -67,6 +67,14 @@ try {
             echo "  - $table\n";
         }
     }
+
+    echo "\nQuerying active MySQL processes (SHOW FULL PROCESSLIST)...\n";
+    $stmt = $pdo->query("SHOW FULL PROCESSLIST");
+    $processes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo "Found " . count($processes) . " active processes:\n";
+    foreach ($processes as $proc) {
+        echo "  - ID: " . $proc['Id'] . " | User: " . $proc['User'] . " | Host: " . $proc['Host'] . " | Command: " . $proc['Command'] . " | Time: " . $proc['Time'] . "s | State: " . $proc['State'] . " | Info: " . $proc['Info'] . "\n";
+    }
     
 } catch (\PDOException $e) {
     echo "❌ CONNECTION FAILED!\n";
