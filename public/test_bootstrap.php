@@ -32,6 +32,19 @@ try {
     $app = require_once __DIR__.'/../bootstrap/app.php';
     echo "✅ Application bootstrapped.\n\n";
 
+    // Register event listeners for diagnostics
+    $events = $app->make('events');
+    echo "Registering event listeners...\n";
+    
+    $events->listen(\Illuminate\Database\Events\QueryExecuted::class, function ($event) {
+        echo "  🔍 [SQL] " . $event->sql . " (Time: " . $event->time . "ms)\n";
+    });
+    
+    $events->listen(\Illuminate\Routing\Events\RouteMatched::class, function ($event) {
+        echo "  🎯 [Route] Matched: '" . $event->route->getName() . "' (URI: " . $event->route->uri() . ")\n";
+    });
+    echo "✅ Event listeners registered.\n\n";
+
     echo "[3/4] Resolving HTTP Kernel...\n";
     // Laravel 11 uses the foundation Application directly, but let's resolve the kernel interface
     $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
