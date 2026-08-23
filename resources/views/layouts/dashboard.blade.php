@@ -63,6 +63,9 @@
                     <a class="nav-link {{ Request::is('admin/galeri*') ? 'active' : '' }}" href="{{ route('admin.galeri.index') }}">
                         <i class="bi bi-images"></i> Galeri
                     </a>
+                    <a class="nav-link {{ Request::is('admin/dokumen*') ? 'active' : '' }}" href="{{ route('admin.dokumen.index') }}">
+                        <i class="bi bi-folder-fill"></i> Dokumen & Administrasi
+                    </a>
                     <a class="nav-link {{ Request::is('admin/slider*') ? 'active' : '' }}" href="{{ route('admin.slider.index') }}">
                         <i class="bi bi-card-image"></i> Slider Banner
                     </a>

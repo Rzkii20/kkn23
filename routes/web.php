@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VillageController;
 use App\Http\Controllers\Admin\PengaturanController;
+use App\Http\Controllers\DokumenPublikController;
 use Illuminate\Support\Facades\Route;
 
 // Halaman Utama / Landing Page
@@ -49,6 +50,9 @@ Route::get('/kontak', function () {
 })->name('kontak');
 Route::post('/kontak', [KontakController::class, 'store'])->name('kontak.store');
 
+// Halaman Dokumen & Administrasi Publik
+Route::get('/dokumen', [DokumenPublikController::class, 'index'])->name('dokumen.index');
+
 // Auth Routes (GUEST) — hanya login, tidak ada register publik
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -78,6 +82,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('artikel', \App\Http\Controllers\Admin\ArtikelController::class);
     Route::resource('event', \App\Http\Controllers\Admin\EventController::class);
     Route::resource('galeri', \App\Http\Controllers\Admin\GaleriController::class);
+
+    // Dokumen & Administrasi
+    Route::resource('dokumen', \App\Http\Controllers\Admin\DokumenController::class)->except(['show']);
 
     // Slider Banner
     Route::resource('slider', \App\Http\Controllers\Admin\SliderController::class)->except(['show']);

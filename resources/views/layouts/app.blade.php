@@ -70,6 +70,7 @@
                         <ul class="dropdown-menu border-0 shadow" aria-labelledby="navbarInformasi">
                             <li><a class="dropdown-item" href="/artikel">Artikel & Berita</a></li>
                             <li><a class="dropdown-item" href="/event">Event Desa</a></li>
+                            <li><a class="dropdown-item" href="/dokumen">Dokumen & Administrasi</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -171,6 +172,7 @@
                         <li><a href="/artikel"><i class="bi bi-chevron-right"></i>Berita & Artikel</a></li>
                         <li><a href="/event"><i class="bi bi-chevron-right"></i>Event Desa</a></li>
                         <li><a href="/galeri"><i class="bi bi-chevron-right"></i>Galeri Kegiatan</a></li>
+                        <li><a href="/dokumen"><i class="bi bi-chevron-right"></i>Dokumen & Administrasi</a></li>
                         <li><a href="/kontak"><i class="bi bi-chevron-right"></i>Hubungi Kami</a></li>
                         <li><a href="/register"><i class="bi bi-chevron-right"></i>Daftar Mitra</a></li>
                     </ul>
