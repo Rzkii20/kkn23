@@ -42,15 +42,32 @@ try {
     $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
     echo "✅ HTTP Kernel instance created.\n\n";
 
-    echo "[Step 4] Running Kernel Bootstrappers...\n";
+    echo "[Step 4] Running Kernel Bootstrappers one-by-one...\n";
     $reflector = new ReflectionClass(get_class($kernel));
-    $bootstrapMethod = $reflector->getMethod('bootstrap');
-    $bootstrapMethod->setAccessible(true);
     
-    $startBoot = microtime(true);
-    $bootstrapMethod->invoke($kernel);
-    $endBoot = microtime(true);
-    echo "✅ Kernel Bootstrappers finished in " . round(($endBoot - $startBoot), 4) . "s.\n\n";
+    if ($reflector->hasProperty('bootstrappers')) {
+        $bootstrappersProp = $reflector->getProperty('bootstrappers');
+        $bootstrappersProp->setAccessible(true);
+        $bootstrappers = $bootstrappersProp->getValue($kernel);
+        
+        foreach ($bootstrappers as $index => $bootstrapper) {
+            echo "  - Running [$index] $bootstrapper ... ";
+            flush();
+            $startB = microtime(true);
+            
+            try {
+                $app->make($bootstrapper)->bootstrap($app);
+                $endB = microtime(true);
+                echo "✅ Success (" . round(($endB - $startB), 4) . "s)\n";
+            } catch (\Throwable $bootErr) {
+                echo "❌ FAILED: " . $bootErr->getMessage() . " in " . $bootErr->getFile() . " on line " . $bootErr->getLine() . "\n";
+            }
+            flush();
+        }
+    } else {
+        echo "⚠️ No bootstrappers property found on kernel class.\n";
+    }
+    echo "✅ All Kernel Bootstrappers finished.\n\n";
 
     echo "[Step 5] Simulating Request object for '/up'...\n";
     $request = Illuminate\Http\Request::create('/up', 'GET');
