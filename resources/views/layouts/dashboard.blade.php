@@ -102,7 +102,7 @@
         <main class="main-content">
             <!-- TOP BAR -->
             <header class="top-bar">
-                <button class="btn d-md-none text-dark fs-4 p-0 me-3" type="button" data-bs-toggle="collapse" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="btn d-md-none text-dark fs-4 p-0 me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar">
                     <i class="bi bi-list"></i>
                 </button>
                 <h5 class="mb-0 fw-semibold text-muted d-none d-sm-block">@yield('page_title', 'Ringkasan Sistem')</h5>
@@ -149,38 +149,67 @@
             </header>
             
             <!-- MOBILE COLLAPSIBLE SIDEBAR -->
-            <div class="collapse d-md-none bg-dark" id="mobileSidebar">
-                <nav class="nav flex-column p-3">
-                    @if(Auth::user()->isAdmin())
-                        <a class="nav-link text-white py-2" href="{{ route('admin.dashboard') }}"><i class="bi bi-grid-fill me-2"></i> Dashboard</a>
-                        <a class="nav-link text-white py-2" href="{{ route('admin.pemilik-umkm') }}"><i class="bi bi-people-fill me-2"></i> Akun Pemilik</a>
-                        <a class="nav-link text-white py-2" href="{{ route('admin.umkm.index') }}"><i class="bi bi-shop-window me-2"></i> Profil UMKM</a>
-                        <a class="nav-link text-white py-2" href="{{ route('admin.kategori.index') }}"><i class="bi bi-tags-fill me-2"></i> Kategori</a>
-                        <a class="nav-link text-white py-2" href="{{ route('admin.produk.index') }}"><i class="bi bi-box-seam-fill me-2"></i> Produk</a>
-                        <a class="nav-link text-white py-2" href="{{ route('admin.wisata.index') }}"><i class="bi bi-geo-alt-fill me-2"></i> Objek Wisata</a>
-                        <a class="nav-link text-white py-2" href="{{ route('admin.artikel.index') }}"><i class="bi bi-journal-text me-2"></i> Artikel</a>
-                        <a class="nav-link text-white py-2" href="{{ route('admin.event.index') }}"><i class="bi bi-calendar-event-fill me-2"></i> Event</a>
-                        <a class="nav-link text-white py-2" href="{{ route('admin.galeri.index') }}"><i class="bi bi-images me-2"></i> Galeri</a>
-                        <a class="nav-link text-white py-2" href="{{ route('admin.slider.index') }}"><i class="bi bi-card-image me-2"></i> Slider Banner</a>
-                        <a class="nav-link text-white py-2" href="{{ route('admin.faq.index') }}"><i class="bi bi-question-circle-fill me-2"></i> FAQ</a>
-                        <a class="nav-link text-white py-2" href="{{ route('admin.pesan.index') }}"><i class="bi bi-envelope-open-fill me-2"></i> Pesan Masuk</a>
-                        <a class="nav-link text-white py-2" href="{{ route('admin.pengaturan.edit') }}"><i class="bi bi-gear-fill me-2"></i> Pengaturan Akun</a>
-                    @else
-                        <a class="nav-link text-white py-2" href="{{ route('mitra.dashboard') }}"><i class="bi bi-grid-fill me-2"></i> Dashboard</a>
-                        <a class="nav-link text-white py-2" href="{{ route('mitra.profil.edit') }}"><i class="bi bi-shop-window me-2"></i> Profil Usaha</a>
-                        <a class="nav-link text-white py-2" href="{{ route('mitra.produk.index') }}"><i class="bi bi-box-seam-fill me-2"></i> Kelola Produk</a>
-                        <a class="nav-link text-white py-2" href="{{ route('mitra.pengaturan.edit') }}"><i class="bi bi-shield-lock-fill me-2"></i> Pengaturan Akun</a>
-                    @endif
-                    <hr class="text-white-50">
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-danger btn-sm w-100"><i class="bi bi-box-arrow-right me-2"></i> Keluar</button>
-                    </form>
-                </nav>
+            <!-- MOBILE OFFCANVAS SIDEBAR -->
+            <div class="offcanvas offcanvas-start text-white d-md-none" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel" style="width: 280px; background-color: var(--mangrove-green);">
+                <div class="offcanvas-header border-bottom" style="border-color: rgba(255, 255, 255, 0.1) !important; padding: 20px;">
+                    <h5 class="offcanvas-title fw-bold d-flex align-items-center gap-2" id="mobileSidebarLabel">
+                        <i class="bi bi-speedometer2 text-warning"></i> DESA SEBONG LAGOI
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body p-0 mobile-sidebar">
+                    <nav class="nav flex-column py-3">
+                        @if(Auth::user()->isAdmin())
+                            <a class="nav-link {{ Request::is('admin/dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
+                                <i class="bi bi-grid-fill"></i> Dashboard
+                            </a>
+                            <a class="nav-link {{ Request::is('admin/umkm*') ? 'active' : '' }}" href="{{ route('admin.umkm.index') }}">
+                                <i class="bi bi-shop-window"></i> Profil UMKM
+                            </a>
+                            <a class="nav-link {{ Request::is('admin/kategori*') ? 'active' : '' }}" href="{{ route('admin.kategori.index') }}">
+                                <i class="bi bi-tags-fill"></i> Kategori Produk
+                            </a>
+                            <a class="nav-link {{ Request::is('admin/produk*') ? 'active' : '' }}" href="{{ route('admin.produk.index') }}">
+                                <i class="bi bi-box-seam-fill"></i> Monitoring Produk
+                            </a>
+                            <a class="nav-link {{ Request::is('admin/wisata*') ? 'active' : '' }}" href="{{ route('admin.wisata.index') }}">
+                                <i class="bi bi-geo-alt-fill"></i> Objek Wisata
+                            </a>
+                            <a class="nav-link {{ Request::is('admin/artikel*') ? 'active' : '' }}" href="{{ route('admin.artikel.index') }}">
+                                <i class="bi bi-journal-text"></i> Artikel & Berita
+                            </a>
+                            <a class="nav-link {{ Request::is('admin/event*') ? 'active' : '' }}" href="{{ route('admin.event.index') }}">
+                                <i class="bi bi-calendar-event-fill"></i> Event Desa
+                            </a>
+                            <a class="nav-link {{ Request::is('admin/galeri*') ? 'active' : '' }}" href="{{ route('admin.galeri.index') }}">
+                                <i class="bi bi-images"></i> Galeri
+                            </a>
+                            <a class="nav-link {{ Request::is('admin/slider*') ? 'active' : '' }}" href="{{ route('admin.slider.index') }}">
+                                <i class="bi bi-card-image"></i> Slider Banner
+                            </a>
+                            <a class="nav-link {{ Request::is('admin/faq*') ? 'active' : '' }}" href="{{ route('admin.faq.index') }}">
+                                <i class="bi bi-question-circle-fill"></i> FAQ
+                            </a>
+                            <a class="nav-link {{ Request::is('admin/pesan*') ? 'active' : '' }}" href="{{ route('admin.pesan.index') }}">
+                                <i class="bi bi-envelope-open-fill"></i> Pesan Masuk
+                            </a>
+                            <a class="nav-link {{ Request::is('admin/pengaturan*') ? 'active' : '' }}" href="{{ route('admin.pengaturan.edit') }}">
+                                <i class="bi bi-gear-fill"></i> Pengaturan Akun
+                            </a>
+                        @endif
+                        <hr class="mx-3 my-2 text-white-50">
+                        <form action="{{ route('logout') }}" method="POST" class="px-3">
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-sm w-100 py-2" style="border-radius: 8px;">
+                                <i class="bi bi-box-arrow-right me-2"></i> Keluar
+                            </button>
+                        </form>
+                    </nav>
+                </div>
             </div>
 
             <!-- CONTAINER ISI HALAMAN -->
-            <div class="container-fluid p-4">
+            <div class="container-fluid p-3 p-md-4">
                 @if(session('success'))
                     <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-4" role="alert" style="border-radius: 10px;">
                         <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}

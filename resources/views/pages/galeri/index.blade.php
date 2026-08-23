@@ -3,7 +3,7 @@
 @section('title', 'Galeri Desa - Sebong Lagoi')
 
 @section('content')
-    <div class="py-5 text-white" style="background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--sea-blue) 100%);">
+    <div class="py-5 text-white" style="background: linear-gradient(135deg, var(--sea-blue-dark) 0%, var(--sea-blue) 100%);">
         <div class="container text-center py-4">
             <h1 class="display-5 fw-bold mb-3">Galeri Sebong Lagoi</h1>
             <p class="lead text-white-50 mx-auto" style="max-width: 600px;">Kumpulan potret dan dokumentasi pesona keindahan serta berbagai kegiatan di Desa Sebong Lagoi.</p>

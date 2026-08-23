@@ -8,11 +8,11 @@
     <div class="row g-4 mb-4">
         <!-- UMKM -->
         <div class="col-xl-3 col-md-6">
-            <div class="card card-custom border-0 shadow-sm h-100 py-2" style="border-left: 4px solid var(--ocean-blue) !important;">
+            <div class="card card-custom border-0 shadow-sm h-100 py-2" style="border-left: 4px solid var(--sea-blue) !important;">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs fw-bold text-uppercase mb-1" style="color: var(--ocean-blue);">Total UMKM Mitra</div>
+                            <div class="text-xs fw-bold text-uppercase mb-1" style="color: var(--sea-blue);">Total UMKM Mitra</div>
                             <div class="h3 mb-0 fw-bold text-dark">{{ $stats['total_umkm'] }}</div>
                         </div>
                         <div class="col-auto">

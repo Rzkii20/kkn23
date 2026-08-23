@@ -1473,9 +1473,29 @@ body {
     border-left: 4px solid var(--accent-gold);
 }
 
+.mobile-sidebar .nav-link {
+    color: rgba(255, 255, 255, 0.7);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.mobile-sidebar .nav-link:hover,
+.mobile-sidebar .nav-link.active {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left: 4px solid var(--accent-gold);
+}
+
 .main-content {
     flex: 1;
+    min-width: 0;
     background-color: #f1f5f9;
+    overflow-x: hidden;
 }
 
 .top-bar {
@@ -1485,6 +1505,15 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+@media (max-width: 768px) {
+    .top-bar {
+        padding: 12px 15px;
+    }
+    .table-responsive table {
+        min-width: 800px;
+    }
 }
 
 /* ====================================================
