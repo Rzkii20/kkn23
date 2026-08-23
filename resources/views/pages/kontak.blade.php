@@ -24,7 +24,7 @@
                                 </div>
                                 <div>
                                     <h6 class="fw-bold mb-1">Alamat Kantor</h6>
-                                    <p class="text-muted mb-0 small">Jl. Pariwisata KM. 46, Desa Sebong Lagoi, Kecamatan Teluk Sebong, Kabupaten Bintan, Kepulauan Riau, Indonesia 29152</p>
+                                    <p class="text-muted mb-0 small">Jl. Pancamarga No. 3A, Desa Sebong Lagoi, Kecamatan Teluk Sebong, Kabupaten Bintan, Kepulauan Riau 29152</p>
                                 </div>
                             </div>
                             
@@ -44,7 +44,7 @@
                                 </div>
                                 <div>
                                     <h6 class="fw-bold mb-1">Telepon / WhatsApp</h6>
-                                    <p class="text-muted mb-0 small">+62 812-3456-7890 (Pelayanan)<br>+62 811-2233-4455 (Admin UMKM)</p>
+                                    <p class="text-muted mb-0 small">+62 812-6155-4737 (Pemerintah Desa / Pelayanan)</p>
                                 </div>
                             </div>
 
@@ -52,9 +52,9 @@
                             
                             <h6 class="fw-bold mb-3">Ikuti Kami</h6>
                             <div class="d-flex gap-2">
-                                <a href="#" class="btn btn-outline-primary" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%;"><i class="bi bi-facebook"></i></a>
-                                <a href="#" class="btn btn-outline-danger" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%;"><i class="bi bi-instagram"></i></a>
-                                <a href="#" class="btn btn-outline-danger" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%;"><i class="bi bi-youtube"></i></a>
+                                <a href="https://www.facebook.com/sebonglagoi" target="_blank" class="btn btn-outline-primary" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%;" title="Facebook"><i class="bi bi-facebook"></i></a>
+                                <a href="https://www.instagram.com/sebonglagoibintan" target="_blank" class="btn btn-outline-danger" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%;" title="Instagram"><i class="bi bi-instagram"></i></a>
+                                <a href="https://sebonglagoi.simdesprima.id/" target="_blank" class="btn btn-outline-success" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%;" title="Website Resmi"><i class="bi bi-globe"></i></a>
                             </div>
                         </div>
                     </div>

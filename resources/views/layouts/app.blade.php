@@ -174,7 +174,6 @@
                         <li><a href="/galeri"><i class="bi bi-chevron-right"></i>Galeri Kegiatan</a></li>
                         <li><a href="/dokumen"><i class="bi bi-chevron-right"></i>Dokumen & Administrasi</a></li>
                         <li><a href="/kontak"><i class="bi bi-chevron-right"></i>Hubungi Kami</a></li>
-                        <li><a href="/register"><i class="bi bi-chevron-right"></i>Daftar Mitra</a></li>
                     </ul>
                 </div>
 
@@ -183,7 +182,7 @@
                     <h5>Kontak Kami</h5>
                     <div class="footer-contact-item">
                         <i class="bi bi-geo-alt-fill"></i>
-                        <span>Kantor Desa Sebong Lagoi, Jl. Pariwisata KM. 46, Sebong Lagoi, Bintan, Kepulauan Riau 29155</span>
+                        <span>Jl. Pancamarga No. 3A, Desa Sebong Lagoi, Kecamatan Teluk Sebong, Kabupaten Bintan, Kepulauan Riau 29152</span>
                     </div>
                     <div class="footer-contact-item">
                         <i class="bi bi-envelope-fill"></i>
@@ -191,7 +190,7 @@
                     </div>
                     <div class="footer-contact-item">
                         <i class="bi bi-whatsapp"></i>
-                        <span>+62 812-3456-7890</span>
+                        <span>+62 812-6155-4737</span>
                     </div>
                     <div class="footer-contact-item">
                         <i class="bi bi-clock-fill"></i>

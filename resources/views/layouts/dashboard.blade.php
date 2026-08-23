@@ -39,9 +39,6 @@
                     <a class="nav-link {{ Request::is('admin/dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
                         <i class="bi bi-grid-fill"></i> Dashboard
                     </a>
-                    <a class="nav-link {{ Request::is('admin/profil-desa*') ? 'active' : '' }}" href="{{ route('admin.profil-desa') }}">
-                        <i class="bi bi-building"></i> Profil Desa
-                    </a>
                     <a class="nav-link {{ Request::is('admin/umkm*') ? 'active' : '' }}" href="{{ route('admin.umkm.index') }}">
                         <i class="bi bi-shop-window"></i> Profil UMKM
                     </a>
@@ -156,7 +153,6 @@
                 <nav class="nav flex-column p-3">
                     @if(Auth::user()->isAdmin())
                         <a class="nav-link text-white py-2" href="{{ route('admin.dashboard') }}"><i class="bi bi-grid-fill me-2"></i> Dashboard</a>
-                        <a class="nav-link text-white py-2" href="{{ route('admin.profil-desa') }}"><i class="bi bi-building me-2"></i> Profil Desa</a>
                         <a class="nav-link text-white py-2" href="{{ route('admin.pemilik-umkm') }}"><i class="bi bi-people-fill me-2"></i> Akun Pemilik</a>
                         <a class="nav-link text-white py-2" href="{{ route('admin.umkm.index') }}"><i class="bi bi-shop-window me-2"></i> Profil UMKM</a>
                         <a class="nav-link text-white py-2" href="{{ route('admin.kategori.index') }}"><i class="bi bi-tags-fill me-2"></i> Kategori</a>
