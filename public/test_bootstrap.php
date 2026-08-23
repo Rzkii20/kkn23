@@ -72,6 +72,30 @@ try {
     echo "[4/4] Handling Simulated GET Request to '/up'...\n";
     $request = Illuminate\Http\Request::create('/up', 'GET');
     
+    // Manually test global middleware one by one
+    echo "Testing global middleware execution step-by-step:\n";
+    if (isset($middleware) && is_array($middleware)) {
+        foreach ($middleware as $index => $mw) {
+            echo "  - Running [$index] $mw ... ";
+            flush();
+            $startMw = microtime(true);
+            try {
+                $instance = $app->make($mw);
+                $res = $instance->handle($request, function($req) {
+                    return new \Illuminate\Http\Response("Pipeline Next");
+                });
+                $endMw = microtime(true);
+                echo "✅ Success (" . round(($endMw - $startMw), 4) . "s)\n";
+            } catch (\Throwable $mwErr) {
+                echo "❌ FAILED: " . $mwErr->getMessage() . "\n";
+            }
+            flush();
+        }
+    }
+    echo "✅ Global middleware test completed.\n\n";
+
+    echo "Sending request through Kernel handle...\n";
+    
     // Disable exception handling in Laravel to let PHP display the raw error
     if (method_exists($app, 'forget')) {
         // Force display exceptions
