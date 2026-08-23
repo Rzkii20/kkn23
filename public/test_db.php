@@ -30,12 +30,23 @@ $db   = $_ENV['DB_DATABASE'] ?? '';
 $user = $_ENV['DB_USERNAME'] ?? '';
 $pass = $_ENV['DB_PASSWORD'] ?? '';
 
+$sessionDriver = $_ENV['SESSION_DRIVER'] ?? '[not set]';
+$cacheStore    = $_ENV['CACHE_STORE'] ?? '[not set]';
+$queueConn     = $_ENV['QUEUE_CONNECTION'] ?? '[not set]';
+$mailMailer    = $_ENV['MAIL_MAILER'] ?? '[not set]';
+
 echo "Database Config from .env:\n";
 echo "- DB_HOST: $host\n";
 echo "- DB_PORT: $port\n";
 echo "- DB_DATABASE: $db\n";
 echo "- DB_USERNAME: $user\n";
 echo "- DB_PASSWORD: " . (empty($pass) ? "[empty]" : "[hidden (length: " . strlen($pass) . ")]") . "\n\n";
+
+echo "Driver Config from .env:\n";
+echo "- SESSION_DRIVER: $sessionDriver\n";
+echo "- CACHE_STORE: $cacheStore\n";
+echo "- QUEUE_CONNECTION: $queueConn\n";
+echo "- MAIL_MAILER: $mailMailer\n\n";
 
 echo "Attempting to connect via PDO (Timeout: 5s)...\n";
 
