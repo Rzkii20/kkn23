@@ -69,8 +69,8 @@ try {
     }
     echo "\n";
 
-    echo "[4/4] Handling Simulated GET Request to '/'...\n";
-    $request = Illuminate\Http\Request::create('/', 'GET');
+    echo "[4/4] Handling Simulated GET Request to '/up'...\n";
+    $request = Illuminate\Http\Request::create('/up', 'GET');
     
     // Disable exception handling in Laravel to let PHP display the raw error
     if (method_exists($app, 'forget')) {
