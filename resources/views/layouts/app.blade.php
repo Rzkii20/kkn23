@@ -186,7 +186,7 @@
                     </div>
                     <div class="footer-contact-item">
                         <i class="bi bi-envelope-fill"></i>
-                        <span>info@sebonglagoi.desa.id</span>
+                        <span>sebonglagoi11@gmail.com</span>
                     </div>
                     <div class="footer-contact-item">
                         <i class="bi bi-whatsapp"></i>

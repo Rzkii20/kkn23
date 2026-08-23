@@ -34,7 +34,7 @@
                                 </div>
                                 <div>
                                     <h6 class="fw-bold mb-1">Email</h6>
-                                    <p class="text-muted mb-0 small">info@sebonglagoi.desa.id<br>support.umkm@sebonglagoi.desa.id</p>
+                                    <p class="text-muted mb-0 small"><a href="mailto:sebonglagoi11@gmail.com" class="text-decoration-none text-muted">sebonglagoi11@gmail.com</a></p>
                                 </div>
                             </div>
                             
