@@ -15,14 +15,42 @@
     }
     .viewer-modal-body {
         position: relative;
-        height: 78vh;
-        padding: 0;
-        background-color: #525659;
+        height: 75vh;
+        overflow-y: auto;
+        background-color: #383b3d;
+        padding: 24px 12px;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
     }
-    .viewer-iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
+    .pdf-page-wrapper {
+        position: relative;
+        background-color: #ffffff;
+        margin: 0 auto 20px auto;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+        border-radius: 4px;
+        overflow: hidden;
+        max-width: 100%;
+    }
+    .pdf-page-wrapper canvas {
+        display: block;
+        width: 100% !important;
+        height: auto !important;
+        pointer-events: none;
+    }
+    .pdf-watermark {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-35deg);
+        font-size: clamp(1.2rem, 3vw, 2.2rem);
+        font-weight: 800;
+        color: rgba(0, 48, 73, 0.07);
+        pointer-events: none;
+        white-space: nowrap;
+        text-transform: uppercase;
+        letter-spacing: 4px;
     }
 </style>
 @endsection
@@ -38,7 +66,7 @@
                 </span>
             </div>
             <h1 class="fs-2 fw-bold mb-2">Dokumen & Administrasi</h1>
-            <p class="text-white-50 mb-0 fs-6">Dokumen resmi Pemerintah Desa Sebong Lagoi yang dapat dilihat dan dibaca oleh masyarakat.</p>
+            <p class="text-white-50 mb-0 fs-6">Dokumen resmi Pemerintah Desa Sebong Lagoi yang dapat dibaca oleh masyarakat.</p>
         </div>
     </div>
 
@@ -127,7 +155,7 @@
                                                 </button>
                                                 <div class="text-center mt-2">
                                                     <small class="text-muted" style="font-size: 0.72rem;">
-                                                        <i class="bi bi-shield-lock me-1"></i>Hanya baca / tidak untuk diunduh
+                                                        <i class="bi bi-shield-lock me-1"></i>Hanya baca &bull; Dilindungi dari unduhan
                                                     </small>
                                                 </div>
                                             </div>
@@ -142,36 +170,63 @@
         </div>
     </section>
 
-    {{-- MODAL VIEWER DOKUMEN (READ ONLY) --}}
+    {{-- MODAL VIEWER DOKUMEN (CANVAS-BASED / NO NATIVE PDF PLUGIN) --}}
     <div class="modal fade" id="docViewerModal" tabindex="-1" aria-labelledby="docViewerModalLabel" aria-hidden="true" data-bs-backdrop="static">
-        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg" style="border-radius: 16px; overflow: hidden;">
-                <div class="modal-header bg-dark text-white py-3 px-4">
-                    <div class="d-flex align-items-center gap-2 overflow-hidden">
+                {{-- HEADER TOOLBAR --}}
+                <div class="modal-header bg-dark text-white py-3 px-4 d-flex justify-content-between align-items-center flex-wrap gap-2">
+                    <div class="d-flex align-items-center gap-2 overflow-hidden" style="max-width: 50%;">
                         <i class="bi bi-file-earmark-text text-warning fs-5 flex-shrink-0"></i>
-                        <div>
-                            <h6 class="modal-title fw-bold mb-0 text-truncate text-white" id="docViewerModalLabel" style="font-size: 1rem;">
+                        <div class="overflow-hidden">
+                            <h6 class="modal-title fw-bold mb-0 text-truncate text-white" id="docViewerModalLabel" style="font-size: 0.95rem;">
                                 Memuat Dokumen...
                             </h6>
                             <span class="badge bg-secondary bg-opacity-50 text-white-50" style="font-size: 0.68rem;">
-                                <i class="bi bi-shield-lock me-1"></i>Pratinjau Dokumen (Hanya Baca)
+                                <i class="bi bi-shield-lock me-1"></i>Penampil Dokumen Aman (Hanya Baca)
                             </span>
                         </div>
                     </div>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" onclick="closeViewer()"></button>
-                </div>
-                <div class="viewer-modal-body" id="viewerContainer" oncontextmenu="return false;">
-                    <div id="viewerLoading" class="d-flex flex-column align-items-center justify-content-center h-100 text-white">
-                        <div class="spinner-border text-warning mb-2" role="status"></div>
-                        <span>Memuat isi dokumen...</span>
+
+                    {{-- ZOOM & PAGE CONTROLS --}}
+                    <div class="d-flex align-items-center gap-2">
+                        <span id="pageIndicator" class="badge bg-secondary text-white fw-normal px-2 py-1 small">
+                            Memuat...
+                        </span>
+                        <div class="btn-group btn-group-sm" role="group">
+                            <button type="button" class="btn btn-outline-light btn-sm" onclick="zoomOut()" title="Perkecil">
+                                <i class="bi bi-zoom-out"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-light btn-sm" onclick="resetZoom()" title="Ukuran Normal">
+                                100%
+                            </button>
+                            <button type="button" class="btn btn-outline-light btn-sm" onclick="zoomIn()" title="Perbesar">
+                                <i class="bi bi-zoom-in"></i>
+                            </button>
+                        </div>
+                        <button type="button" class="btn-close btn-close-white ms-2" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <iframe id="docViewerIframe" class="viewer-iframe d-none" src="" allow="autoplay" oncontextmenu="return false;"></iframe>
                 </div>
-                <div class="modal-footer bg-light py-2 px-4 d-flex justify-content-between">
-                    <small class="text-muted">
-                        <i class="bi bi-info-circle me-1"></i>Dokumen resmi Pemerintah Desa Sebong Lagoi.
+
+                {{-- CANVAS BODY --}}
+                <div class="viewer-modal-body" id="viewerContainer" oncontextmenu="return false;">
+                    <div id="viewerLoading" class="d-flex flex-column align-items-center justify-content-center py-5 text-white">
+                        <div class="spinner-border text-warning mb-3" role="status"></div>
+                        <span class="fw-semibold">Sedang merender halaman dokumen...</span>
+                        <small class="text-white-50 mt-1">Harap tunggu sebentar</small>
+                    </div>
+                    <div id="viewerError" class="d-none p-4 text-center"></div>
+                    <div id="pdfPagesContainer" class="d-flex flex-column align-items-center"></div>
+                </div>
+
+                {{-- FOOTER --}}
+                <div class="modal-footer bg-light py-2 px-4 d-flex justify-content-between align-items-center">
+                    <small class="text-muted" style="font-size: 0.8rem;">
+                        <i class="bi bi-shield-check text-success me-1"></i>Dokumen resmi Desa Sebong Lagoi. Dilindungi hak cipta.
                     </small>
-                    <button type="button" class="btn btn-secondary btn-sm px-3" data-bs-dismiss="modal" onclick="closeViewer()">Tutup</button>
+                    <button type="button" class="btn btn-secondary btn-sm px-4" data-bs-dismiss="modal" style="border-radius: 8px;">
+                        Tutup
+                    </button>
                 </div>
             </div>
         </div>
@@ -179,39 +234,138 @@
 @endsection
 
 @section('scripts')
+{{-- PDF.js library for Canvas rendering (no native PDF toolbar/download buttons) --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
-    function openViewer(url, title, ext) {
+    if (typeof pdfjsLib !== 'undefined') {
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    }
+
+    let currentPdfDoc = null;
+    let currentScale = 1.3;
+
+    async function openViewer(url, title, ext) {
         const modalEl = document.getElementById('docViewerModal');
         const modalTitle = document.getElementById('docViewerModalLabel');
-        const iframe = document.getElementById('docViewerIframe');
+        const container = document.getElementById('pdfPagesContainer');
         const loading = document.getElementById('viewerLoading');
+        const errorBox = document.getElementById('viewerError');
+        const pageIndicator = document.getElementById('pageIndicator');
 
         modalTitle.innerText = title;
+        container.innerHTML = '';
         loading.classList.remove('d-none');
-        iframe.classList.add('d-none');
-
-        // Tambahkan parameter toolbar=0 agar browser tidak memunculkan bar download bawaan PDF
-        const targetUrl = url + (ext.toLowerCase() === 'pdf' ? '#toolbar=0&navpanes=0&scrollbar=0' : '');
-        iframe.src = targetUrl;
-
-        iframe.onload = function() {
-            loading.classList.add('d-none');
-            iframe.classList.remove('d-none');
-        };
+        errorBox.classList.add('d-none');
+        pageIndicator.innerText = 'Memuat...';
 
         const modal = new bootstrap.Modal(modalEl);
         modal.show();
+
+        if (ext.toLowerCase() !== 'pdf') {
+            loading.classList.add('d-none');
+            errorBox.classList.remove('d-none');
+            errorBox.innerHTML = `
+                <div class="alert alert-info text-dark border-0 shadow-sm text-start" style="border-radius: 12px; max-width: 600px; margin: 0 auto;">
+                    <h6 class="fw-bold mb-2"><i class="bi bi-file-earmark-text text-primary me-2"></i>Dokumen Format ${ext}</h6>
+                    <p class="small text-muted mb-0">Dokumen ini berformat <strong>${ext}</strong>. Untuk menjaga keamanan arsip desa, dokumen hanya dapat dibaca langsung secara fisik di Kantor Desa Sebong Lagoi.</p>
+                </div>
+            `;
+            pageIndicator.innerText = 'Format ' + ext;
+            return;
+        }
+
+        try {
+            const loadingTask = pdfjsLib.getDocument({
+                url: url,
+                cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/',
+                cMapPacked: true,
+            });
+
+            currentPdfDoc = await loadingTask.promise;
+            loading.classList.add('d-none');
+            pageIndicator.innerText = `Total ${currentPdfDoc.numPages} Halaman`;
+
+            await renderAllPages(currentPdfDoc, currentScale);
+        } catch (err) {
+            console.error('PDF.js Error:', err);
+            loading.classList.add('d-none');
+            errorBox.classList.remove('d-none');
+            errorBox.innerHTML = `
+                <div class="alert alert-danger border-0 shadow-sm text-start" style="border-radius: 12px; max-width: 600px; margin: 0 auto;">
+                    <h6 class="fw-bold mb-1"><i class="bi bi-exclamation-triangle-fill me-2"></i>Gagal Memuat Dokumen</h6>
+                    <p class="small mb-0">Terjadi kesalahan saat memproses berkas. Pastikan format PDF valid.</p>
+                </div>
+            `;
+            pageIndicator.innerText = 'Gagal';
+        }
     }
 
-    function closeViewer() {
-        const iframe = document.getElementById('docViewerIframe');
-        iframe.src = '';
+    async function renderAllPages(pdfDoc, scale) {
+        const container = document.getElementById('pdfPagesContainer');
+        container.innerHTML = '';
+
+        for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+            const page = await pdfDoc.getPage(pageNum);
+            const viewport = page.getViewport({ scale: scale });
+
+            const pageWrapper = document.createElement('div');
+            pageWrapper.className = 'pdf-page-wrapper';
+            pageWrapper.style.width = viewport.width + 'px';
+
+            const canvas = document.createElement('canvas');
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+
+            const watermark = document.createElement('div');
+            watermark.className = 'pdf-watermark';
+            watermark.innerText = 'DESA SEBONG LAGOI';
+
+            pageWrapper.appendChild(canvas);
+            pageWrapper.appendChild(watermark);
+            container.appendChild(pageWrapper);
+
+            const ctx = canvas.getContext('2d');
+            const renderContext = {
+                canvasContext: ctx,
+                viewport: viewport
+            };
+            await page.render(renderContext).promise;
+        }
+    }
+
+    async function zoomIn() {
+        if (!currentPdfDoc) return;
+        currentScale = Math.min(2.5, currentScale + 0.2);
+        await renderAllPages(currentPdfDoc, currentScale);
+    }
+
+    async function zoomOut() {
+        if (!currentPdfDoc) return;
+        currentScale = Math.max(0.7, currentScale - 0.2);
+        await renderAllPages(currentPdfDoc, currentScale);
+    }
+
+    async function resetZoom() {
+        if (!currentPdfDoc) return;
+        currentScale = 1.3;
+        await renderAllPages(currentPdfDoc, currentScale);
     }
 
     // Blokir klik kanan di container viewer modal
     document.getElementById('viewerContainer').addEventListener('contextmenu', function(e) {
         e.preventDefault();
         return false;
+    });
+
+    // Blokir shortcut download/print (Ctrl+S, Ctrl+P, Ctrl+U) saat modal terbuka
+    document.addEventListener('keydown', function(e) {
+        const modal = document.getElementById('docViewerModal');
+        if (modal && modal.classList.contains('show')) {
+            if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'p' || e.key === 'u')) {
+                e.preventDefault();
+                return false;
+            }
+        }
     });
 </script>
 @endsection
