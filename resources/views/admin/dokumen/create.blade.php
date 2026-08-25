@@ -64,13 +64,13 @@
 
                     {{-- File Upload --}}
                     <div class="mb-4">
-                        <label for="file_dokumen" class="form-label fw-medium small text-dark">File Dokumen <span class="text-danger">*</span></label>
+                        <label for="file_dokumen" class="form-label fw-medium small text-dark">File Dokumen (PDF) <span class="text-danger">*</span></label>
                         <input type="file" name="file_dokumen" id="file_dokumen"
                                class="form-control @error('file_dokumen') is-invalid @enderror"
-                               accept=".pdf,.doc,.docx,.xls,.xlsx"
+                               accept=".pdf,application/pdf"
                                style="border-radius: 10px;">
                         <div class="text-muted mt-1" style="font-size: 0.75rem;">
-                            Format: PDF, DOC, DOCX, XLS, XLSX. Maksimal 10 MB.
+                            <i class="bi bi-info-circle me-1 text-primary"></i><strong>Wajib PDF (Maksimal 10 MB).</strong> Format PDF diperlukan agar dokumen dapat ditampilkan langsung di browser dalam mode <em>hanya-baca</em> tanpa bisa diunduh oleh pengunjung.
                         </div>
                         @error('file_dokumen') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>

@@ -73,18 +73,16 @@
                             <i class="bi bi-{{ $ext === 'pdf' ? 'filetype-pdf text-danger' : 'file-earmark-text text-primary' }} fs-3"></i>
                             <div>
                                 <div class="small fw-semibold text-dark">File saat ini:</div>
-                                <a href="{{ asset('storage/' . $dokumen->file_dokumen) }}" target="_blank" class="small text-primary">
-                                    {{ basename($dokumen->file_dokumen) }}
-                                </a>
+                                <span class="small text-muted">{{ basename($dokumen->file_dokumen) }} ({{ strtoupper($ext) }})</span>
                             </div>
                         </div>
 
                         <input type="file" name="file_dokumen" id="file_dokumen"
                                class="form-control @error('file_dokumen') is-invalid @enderror"
-                               accept=".pdf,.doc,.docx,.xls,.xlsx"
+                               accept=".pdf,application/pdf"
                                style="border-radius: 10px;">
                         <div class="text-muted mt-1" style="font-size: 0.75rem;">
-                            Biarkan kosong jika tidak ingin mengganti file. Format: PDF, DOC, DOCX, XLS, XLSX. Maks 10 MB.
+                            <i class="bi bi-info-circle me-1 text-primary"></i>Biarkan kosong jika tidak ingin mengganti. <strong>Format: PDF (Maksimal 10 MB).</strong>
                         </div>
                         @error('file_dokumen') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>

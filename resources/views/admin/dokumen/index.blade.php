@@ -47,12 +47,17 @@
                                 </td>
                                 <td><span class="text-muted small">{{ $dokumen->tahun }}</span></td>
                                 <td>
-                                    @php $ext = pathinfo($dokumen->file_dokumen, PATHINFO_EXTENSION); @endphp
-                                    <a href="{{ route('dokumen.lihat', $dokumen->id) }}" target="_blank"
-                                       class="btn btn-outline-secondary btn-sm px-2" style="border-radius: 6px;" title="Lihat Dokumen">
-                                        <i class="bi bi-{{ $ext === 'pdf' ? 'filetype-pdf' : 'file-earmark-text' }} me-1"></i>
-                                        {{ strtoupper($ext) }}
-                                    </a>
+                                    @php $ext = strtolower(pathinfo($dokumen->file_dokumen, PATHINFO_EXTENSION)); @endphp
+                                    @if($ext === 'pdf')
+                                        <a href="{{ route('dokumen.lihat', $dokumen->id) }}" target="_blank"
+                                           class="btn btn-outline-danger btn-sm px-2" style="border-radius: 6px;" title="Lihat PDF">
+                                            <i class="bi bi-filetype-pdf me-1"></i> PDF
+                                        </a>
+                                    @else
+                                        <span class="badge bg-secondary text-uppercase" title="Format non-PDF">
+                                            <i class="bi bi-file-earmark me-1"></i> {{ $ext }}
+                                        </span>
+                                    @endif
                                 </td>
                                 <td><span class="text-muted small">{{ $dokumen->created_at->format('d M Y') }}</span></td>
                                 <td class="pe-4 text-end">
