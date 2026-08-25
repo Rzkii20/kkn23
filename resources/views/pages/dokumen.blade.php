@@ -13,7 +13,7 @@
                 </span>
             </div>
             <h1 class="fs-2 fw-bold mb-2">Dokumen & Administrasi</h1>
-            <p class="text-white-50 mb-0 fs-6">Dokumen resmi Pemerintah Desa Sebong Lagoi yang dapat dibaca oleh masyarakat.</p>
+            <p class="text-white-50 mb-0 fs-6">Dokumen resmi Pemerintah Desa Sebong Lagoi. Untuk salinan dokumen, silakan kunjungi Kantor Desa.</p>
         </div>
     </div>
 
@@ -93,10 +93,12 @@
                                                 <p class="text-muted small mb-3 lh-sm">{{ Str::limit($dokumen->deskripsi, 100) }}</p>
                                             @endif
 
-                                            <a href="{{ asset('storage/' . $dokumen->file_dokumen) }}" target="_blank"
-                                               class="btn btn-sm btn-outline-primary w-100" style="border-radius: 8px;">
-                                                <i class="bi bi-eye me-1"></i> Lihat Dokumen
-                                            </a>
+                                            <div class="d-flex align-items-center gap-2 mt-2">
+                                                <span class="badge bg-secondary bg-opacity-10 text-secondary border small">
+                                                    <i class="bi bi-lock-fill me-1"></i> Dokumen Resmi
+                                                </span>
+                                                <span class="text-muted small">Tersedia di Kantor Desa</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
