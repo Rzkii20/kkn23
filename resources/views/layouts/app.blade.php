@@ -31,7 +31,9 @@
                          alt="Logo Desa"
                          style="width:44px;height:44px;object-fit:cover;border-radius:10px;flex-shrink:0;">
                 @else
-                    <div class="navbar-brand-logo">SL</div>
+                    <img src="{{ asset('images/logo-bintan.png') }}"
+                         alt="Logo Kabupaten Bintan"
+                         style="width:44px;height:44px;object-fit:contain;flex-shrink:0;">
                 @endif
                 <div class="navbar-brand-text">
                     <span class="brand-name">Desa Sebong Lagoi</span>
@@ -144,7 +146,9 @@
                 <!-- Brand & Description -->
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-logo">
-                        <div class="footer-logo-icon">SL</div>
+                        <img src="{{ asset('images/logo-bintan.png') }}"
+                             alt="Logo Kabupaten Bintan"
+                             style="width:52px;height:52px;object-fit:contain;flex-shrink:0;">
                         <div>
                             <div class="footer-brand-name">Desa Sebong Lagoi</div>
                             <div class="footer-brand-sub">Sistem UMKM & Potensi Desa</div>
