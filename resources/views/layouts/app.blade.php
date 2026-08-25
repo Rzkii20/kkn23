@@ -48,9 +48,17 @@
                     <li class="nav-item">
                         <a class="nav-link {{ Route::is('home') ? 'active' : '' }}" href="{{ route('home') }}">Beranda</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('tentang-desa') ? 'active' : '' }}" href="/tentang-desa">Tentang Desa</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {{ Request::is('tentang-desa') || Request::is('struktur-desa') ? 'active' : '' }}"
+                           href="#" id="navbarTentang" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Profil Desa
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow" aria-labelledby="navbarTentang">
+                            <li><a class="dropdown-item" href="/tentang-desa"><i class="bi bi-info-circle me-2 text-muted"></i>Tentang Desa</a></li>
+                            <li><a class="dropdown-item" href="/struktur-desa"><i class="bi bi-diagram-3 me-2 text-muted"></i>Struktur Desa</a></li>
+                        </ul>
                     </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarUmkm" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             UMKM

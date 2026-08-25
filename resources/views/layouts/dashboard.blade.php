@@ -60,6 +60,9 @@
                     <a class="nav-link {{ Request::is('admin/galeri*') ? 'active' : '' }}" href="{{ route('admin.galeri.index') }}">
                         <i class="bi bi-images"></i> Galeri
                     </a>
+                    <a class="nav-link {{ Request::is('admin/struktur-desa*') ? 'active' : '' }}" href="{{ route('admin.struktur-desa.index') }}">
+                        <i class="bi bi-diagram-3-fill"></i> Struktur Desa
+                    </a>
                     <a class="nav-link {{ Request::is('admin/dokumen*') ? 'active' : '' }}" href="{{ route('admin.dokumen.index') }}">
                         <i class="bi bi-folder-fill"></i> Dokumen & Administrasi
                     </a>
@@ -184,9 +187,16 @@
                             <a class="nav-link {{ Request::is('admin/galeri*') ? 'active' : '' }}" href="{{ route('admin.galeri.index') }}">
                                 <i class="bi bi-images"></i> Galeri
                             </a>
+                            <a class="nav-link {{ Request::is('admin/struktur-desa*') ? 'active' : '' }}" href="{{ route('admin.struktur-desa.index') }}">
+                                <i class="bi bi-diagram-3-fill"></i> Struktur Desa
+                            </a>
+                            <a class="nav-link {{ Request::is('admin/dokumen*') ? 'active' : '' }}" href="{{ route('admin.dokumen.index') }}">
+                                <i class="bi bi-folder-fill"></i> Dokumen &amp; Administrasi
+                            </a>
                             <a class="nav-link {{ Request::is('admin/slider*') ? 'active' : '' }}" href="{{ route('admin.slider.index') }}">
                                 <i class="bi bi-card-image"></i> Slider Banner
                             </a>
+
                             <a class="nav-link {{ Request::is('admin/faq*') ? 'active' : '' }}" href="{{ route('admin.faq.index') }}">
                                 <i class="bi bi-question-circle-fill"></i> FAQ
                             </a>

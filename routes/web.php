@@ -13,6 +13,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // Halaman Profil Desa
 Route::get('/tentang-desa', [VillageController::class, 'about'])->name('about');
 Route::get('/potensi-desa', [VillageController::class, 'potential'])->name('potential');
+Route::get('/struktur-desa', [VillageController::class, 'struktur'])->name('struktur-desa');
 
 // Halaman Katalog UMKM Publik
 use App\Http\Controllers\UmkmController;
@@ -82,6 +83,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('artikel', \App\Http\Controllers\Admin\ArtikelController::class);
     Route::resource('event', \App\Http\Controllers\Admin\EventController::class);
     Route::resource('galeri', \App\Http\Controllers\Admin\GaleriController::class);
+
+    // Struktur Desa
+    Route::resource('struktur-desa', \App\Http\Controllers\Admin\StrukturDesaController::class)->except(['show']);
 
     // Dokumen & Administrasi
     Route::resource('dokumen', \App\Http\Controllers\Admin\DokumenController::class)->except(['show']);

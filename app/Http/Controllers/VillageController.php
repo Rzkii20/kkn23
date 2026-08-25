@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\StrukturDesa;
 use Illuminate\View\View;
 
 class VillageController extends Controller
@@ -35,5 +36,14 @@ class VillageController extends Controller
         })->whereNotNull('foto_produk')->first();
 
         return view('pages.potential', compact('mangrove', 'hasilLaut', 'kerajinan'));
+    }
+
+    /**
+     * Display the Village Structure page.
+     */
+    public function struktur(): View
+    {
+        $strukturs = StrukturDesa::aktif()->get();
+        return view('pages.struktur-desa', compact('strukturs'));
     }
 }
