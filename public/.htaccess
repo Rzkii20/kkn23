@@ -5,10 +5,9 @@
 
     RewriteEngine On
 
-    # Force HTTPS safely (supports direct SSL and reverse proxies/Cloudflare)
-    RewriteCond %{HTTPS} !=on
+    # Force HTTPS
+    RewriteCond %{HTTPS} off
     RewriteCond %{HTTP:X-Forwarded-Proto} !https
-    RewriteCond %{HTTP:X-Forwarded-SSL} !=on
     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
     # Handle Authorization Header

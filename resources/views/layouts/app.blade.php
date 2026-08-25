@@ -24,7 +24,7 @@
     <meta property="og:type" content="@yield('og_type', 'website')">
     <meta property="og:locale" content="id_ID">
     <meta property="og:site_name" content="Desa Sebong Lagoi">
-    <meta property="og:title" content="@yield('og_title', $__env->yieldContent('title', 'Desa Sebong Lagoi - Sistem Informasi UMKM & Potensi Desa'))">
+    <meta property="og:title" content="@yield('title', 'Desa Sebong Lagoi - Sistem Informasi UMKM & Potensi Desa')">
     <meta property="og:description" content="@yield('meta_description', 'Portal Resmi Sistem Informasi Promosi & Pemasaran UMKM serta Potensi Wisata dan Administrasi Desa Sebong Lagoi, Kecamatan Teluk Sebong, Kabupaten Bintan, Kepulauan Riau.')">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:image" content="@yield('og_image', asset('images/logo-bintan.png'))">
@@ -32,7 +32,7 @@
 
     {{-- Twitter Cards --}}
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@yield('og_title', $__env->yieldContent('title', 'Desa Sebong Lagoi - Sistem Informasi UMKM & Potensi Desa'))">
+    <meta name="twitter:title" content="@yield('title', 'Desa Sebong Lagoi - Sistem Informasi UMKM & Potensi Desa')">
     <meta name="twitter:description" content="@yield('meta_description', 'Portal Resmi Sistem Informasi Promosi & Pemasaran UMKM serta Potensi Wisata dan Administrasi Desa Sebong Lagoi, Kecamatan Teluk Sebong, Kabupaten Bintan, Kepulauan Riau.')">
     <meta name="twitter:image" content="@yield('og_image', asset('images/logo-bintan.png'))">
 
