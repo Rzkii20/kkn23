@@ -88,7 +88,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('struktur-desa', \App\Http\Controllers\Admin\StrukturDesaController::class)->except(['show']);
 
     // Dokumen & Administrasi
-    Route::resource('dokumen', \App\Http\Controllers\Admin\DokumenController::class)->except(['show']);
+    Route::resource('dokumen', \App\Http\Controllers\Admin\DokumenController::class)
+        ->except(['show'])
+        ->parameters(['dokumen' => 'dokumen']);
+
 
     // Slider Banner
     Route::resource('slider', \App\Http\Controllers\Admin\SliderController::class)->except(['show']);
