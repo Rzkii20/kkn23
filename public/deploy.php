@@ -42,15 +42,33 @@ if (isset($_GET['action']) && $_GET['action'] === 'storage') {
 // Akses: https://sebonglagoi.com/deploy.php?action=cache
 if (isset($_GET['action']) && $_GET['action'] === 'cache') {
     echo "<pre style='background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;'>";
-    echo "<b>⚡ Clearing & Rebuilding Cache...</b>\n";
-    $kernel->call('config:clear'); echo $kernel->output();
-    $kernel->call('config:cache'); echo $kernel->output();
-    $kernel->call('route:clear');  echo $kernel->output();
+    echo "<b>⚡ Clearing All Caches...</b>\n";
     $kernel->call('view:clear');   echo $kernel->output();
-    echo "<span style='color: green; font-weight: bold;'>✅ Cache berhasil di-refresh!</span>\n";
+    $kernel->call('cache:clear');  echo $kernel->output();
+    $kernel->call('route:clear');  echo $kernel->output();
+    $kernel->call('config:clear'); echo $kernel->output();
+    echo "<span style='color: green; font-weight: bold;'>✅ Semua Cache & View berhasil dibersihkan!</span>\n";
+    echo "<a href='/'>Klik di sini untuk buka halaman utama</a>\n";
     echo "</pre></body></html>";
     exit;
 }
+
+// === LOG VIEWER MODE ===
+// Akses: https://sebonglagoi.com/deploy.php?action=log
+if (isset($_GET['action']) && $_GET['action'] === 'log') {
+    $logFile = storage_path('logs/laravel.log');
+    echo "<pre style='background: #1e293b; color: #f8fafc; padding: 15px; border-radius: 8px; font-size: 12px; line-height: 1.5; overflow: auto; max-height: 80vh;'>";
+    if (file_exists($logFile)) {
+        $lines = file($logFile);
+        $lastLines = array_slice($lines, -120);
+        echo htmlspecialchars(implode("", $lastLines));
+    } else {
+        echo "No laravel.log file found in storage/logs/";
+    }
+    echo "</pre></body></html>";
+    exit;
+}
+
 
 echo "<pre style='background: #ffffff; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;'>";
 

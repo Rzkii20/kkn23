@@ -50,9 +50,7 @@ Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri.index');
 
 // Halaman Kontak (GET = tampil halaman, POST = kirim pesan)
 use App\Http\Controllers\KontakController;
-Route::get('/kontak', function () {
-    return view('pages.kontak');
-})->name('kontak');
+Route::view('/kontak', 'pages.kontak')->name('kontak');
 Route::post('/kontak', [KontakController::class, 'store'])->name('kontak.store');
 
 // Halaman Dokumen & Administrasi Publik
