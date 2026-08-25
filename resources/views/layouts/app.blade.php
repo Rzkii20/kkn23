@@ -12,6 +12,7 @@
     <meta name="keywords" content="@yield('meta_keywords', 'Desa Sebong Lagoi, UMKM Sebong Lagoi, Wisata Bintan, Teluk Sebong, Kepulauan Riau, Produk Lokal Bintan, Kerajinan Bintan, Oleh-oleh Bintan, Wisata Mangrove, Pemerintahan Desa Sebong Lagoi')">
     <meta name="author" content="Pemerintah Desa Sebong Lagoi">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="google-site-verification" content="google7296a5e8e936d655">
     <link rel="canonical" href="{{ url()->current() }}">
 
     {{-- Favicon & App Icons --}}
