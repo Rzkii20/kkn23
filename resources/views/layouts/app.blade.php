@@ -37,43 +37,46 @@
     <meta name="twitter:image" content="@yield('og_image', asset('images/logo-bintan.png'))">
 
     {{-- Structured Data (Schema.org JSON-LD) --}}
+    @php
+        $schemaOrg = [
+            chr(64) . 'context' => 'https://schema.org',
+            chr(64) . 'graph' => [
+                [
+                    chr(64) . 'type' => 'GovernmentOrganization',
+                    chr(64) . 'id' => url('/') . '#organization',
+                    'name' => 'Pemerintah Desa Sebong Lagoi',
+                    'url' => url('/'),
+                    'logo' => [
+                        chr(64) . 'type' => 'ImageObject',
+                        'url' => asset('images/logo-bintan.png'),
+                    ],
+                    'address' => [
+                        chr(64) . 'type' => 'PostalAddress',
+                        'streetAddress' => 'Jl. Pancamarga No. 3A',
+                        'addressLocality' => 'Kecamatan Teluk Sebong',
+                        'addressRegion' => 'Kabupaten Bintan',
+                        'postalCode' => '29152',
+                        'addressCountry' => 'ID',
+                    ],
+                    'telephone' => '+6281261554737',
+                    'email' => 'sebonglagoi11@gmail.com',
+                ],
+                [
+                    chr(64) . 'type' => 'WebSite',
+                    chr(64) . 'id' => url('/') . '#website',
+                    'url' => url('/'),
+                    'name' => 'Desa Sebong Lagoi',
+                    'description' => 'Sistem Informasi Promosi UMKM & Potensi Desa Sebong Lagoi, Bintan',
+                    'publisher' => [
+                        chr(64) . 'id' => url('/') . '#organization',
+                    ],
+                    'inLanguage' => 'id-ID',
+                ],
+            ],
+        ];
+    @endphp
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "GovernmentOrganization",
-          "@id": "{{ url('/') }}#organization",
-          "name": "Pemerintah Desa Sebong Lagoi",
-          "url": "{{ url('/') }}",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "{{ asset('images/logo-bintan.png') }}"
-          },
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Jl. Pancamarga No. 3A",
-            "addressLocality": "Kecamatan Teluk Sebong",
-            "addressRegion": "Kabupaten Bintan",
-            "postalCode": "29152",
-            "addressCountry": "ID"
-          },
-          "telephone": "+6281261554737",
-          "email": "sebonglagoi11@gmail.com"
-        },
-        {
-          "@type": "WebSite",
-          "@id": "{{ url('/') }}#website",
-          "url": "{{ url('/') }}",
-          "name": "Desa Sebong Lagoi",
-          "description": "Sistem Informasi Promosi UMKM & Potensi Desa Sebong Lagoi, Bintan",
-          "publisher": {
-            "@id": "{{ url('/') }}#organization"
-          },
-          "inLanguage": "id-ID"
-        }
-      ]
-    }
+    {!! json_encode($schemaOrg, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
     </script>
 
     <!-- Bootstrap 5 CSS -->
@@ -93,7 +96,12 @@
          ==================================================== -->
     <nav class="navbar navbar-expand-lg navbar-custom {{ !Route::is('home') ? 'navbar-solid' : '' }}" id="mainNavbar">
         @php
-            $logoAdmin = \App\Models\User::where('role', 'admin')->value('foto_profil');
+            $logoAdmin = null;
+            try {
+                $logoAdmin = \App\Models\User::where('role', 'admin')->value('foto_profil');
+            } catch (\Throwable $e) {
+                $logoAdmin = null;
+            }
         @endphp
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
