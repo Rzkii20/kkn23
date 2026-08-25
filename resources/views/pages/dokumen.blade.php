@@ -52,6 +52,79 @@
         text-transform: uppercase;
         letter-spacing: 4px;
     }
+
+    /* EXCEL STYLING */
+    .excel-container {
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+        overflow: hidden;
+        margin: 0 auto;
+        max-width: 100%;
+    }
+    .excel-tabs-bar {
+        background: #25282a;
+        padding: 8px 12px 0;
+        display: flex;
+        gap: 4px;
+        overflow-x: auto;
+        border-bottom: 2px solid #0077b6;
+    }
+    .excel-tab-btn {
+        background: #424649;
+        color: #ddd;
+        border: none;
+        padding: 6px 16px;
+        border-radius: 6px 6px 0 0;
+        font-size: 0.8rem;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background .2s, color .2s;
+    }
+    .excel-tab-btn:hover {
+        background: #505559;
+        color: #fff;
+    }
+    .excel-tab-btn.active {
+        background: #0077b6;
+        color: #fff;
+        font-weight: bold;
+    }
+    .excel-table-scroll {
+        max-height: 65vh;
+        overflow: auto;
+        padding: 16px;
+    }
+    .excel-table-scroll table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.85rem;
+        background: #fff;
+    }
+    .excel-table-scroll th, .excel-table-scroll td {
+        border: 1px solid #dee2e6;
+        padding: 6px 10px;
+        white-space: nowrap;
+    }
+    .excel-table-scroll tr:first-child td, .excel-table-scroll th {
+        background: #f1f5f9;
+        font-weight: 600;
+        color: #334155;
+    }
+
+    /* WORD STYLING */
+    .docx-wrapper {
+        background: transparent !important;
+        padding: 0 !important;
+    }
+    .docx-wrapper > section.docx {
+        background: #ffffff !important;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.35) !important;
+        margin: 0 auto 20px auto !important;
+        border-radius: 4px !important;
+        padding: 40px !important;
+        max-width: 850px !important;
+    }
 </style>
 @endsection
 
@@ -125,15 +198,23 @@
 
                         <div class="row g-3">
                             @foreach($items as $dokumen)
-                                @php $ext = strtoupper(pathinfo($dokumen->file_dokumen, PATHINFO_EXTENSION)); @endphp
+                                @php
+                                    $ext = strtoupper(pathinfo($dokumen->file_dokumen, PATHINFO_EXTENSION));
+                                    $isPdf = in_array($ext, ['PDF']);
+                                    $isWord = in_array($ext, ['DOC', 'DOCX']);
+                                    $isExcel = in_array($ext, ['XLS', 'XLSX', 'CSV']);
+                                    $iconColor = $isPdf ? 'text-danger' : ($isExcel ? 'text-success' : ($isWord ? 'text-primary' : 'text-warning'));
+                                    $bgColor = $isPdf ? '#fff0f0' : ($isExcel ? '#f0fff4' : ($isWord ? '#f0f4ff' : '#fffdf0'));
+                                    $iconName = $isPdf ? 'filetype-pdf' : ($isExcel ? 'filetype-xlsx' : ($isWord ? 'filetype-docx' : 'file-earmark-text'));
+                                @endphp
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card doc-card border-0 shadow-sm h-100 bg-white">
                                         <div class="card-body p-4 d-flex flex-column justify-content-between">
                                             <div>
                                                 <div class="d-flex align-items-start gap-3 mb-3">
                                                     <div class="rounded-3 d-flex align-items-center justify-content-center flex-shrink-0"
-                                                         style="width: 48px; height: 48px; background: {{ $ext === 'PDF' ? '#fff0f0' : '#f0f4ff' }};">
-                                                        <i class="bi bi-{{ $ext === 'PDF' ? 'filetype-pdf text-danger' : 'file-earmark-text text-primary' }} fs-4"></i>
+                                                         style="width: 48px; height: 48px; background: {{ $bgColor }};">
+                                                        <i class="bi bi-{{ $iconName }} {{ $iconColor }} fs-4"></i>
                                                     </div>
                                                     <div>
                                                         <span class="badge bg-light text-secondary border small mb-1">{{ $ext }} &bull; {{ $dokumen->tahun }}</span>
@@ -170,7 +251,7 @@
         </div>
     </section>
 
-    {{-- MODAL VIEWER DOKUMEN (CANVAS-BASED / NO NATIVE PDF PLUGIN) --}}
+    {{-- MODAL VIEWER DOKUMEN (UNIVERSAL READ-ONLY: PDF, EXCEL, WORD) --}}
     <div class="modal fade" id="docViewerModal" tabindex="-1" aria-labelledby="docViewerModalLabel" aria-hidden="true" data-bs-backdrop="static">
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg" style="border-radius: 16px; overflow: hidden;">
@@ -188,12 +269,12 @@
                         </div>
                     </div>
 
-                    {{-- ZOOM & PAGE CONTROLS --}}
+                    {{-- CONTROLS --}}
                     <div class="d-flex align-items-center gap-2">
                         <span id="pageIndicator" class="badge bg-secondary text-white fw-normal px-2 py-1 small">
                             Memuat...
                         </span>
-                        <div class="btn-group btn-group-sm" role="group">
+                        <div id="pdfControls" class="btn-group btn-group-sm" role="group">
                             <button type="button" class="btn btn-outline-light btn-sm" onclick="zoomOut()" title="Perkecil">
                                 <i class="bi bi-zoom-out"></i>
                             </button>
@@ -208,15 +289,26 @@
                     </div>
                 </div>
 
-                {{-- CANVAS BODY --}}
+                {{-- VIEWER CONTAINER BODY --}}
                 <div class="viewer-modal-body" id="viewerContainer" oncontextmenu="return false;">
                     <div id="viewerLoading" class="d-flex flex-column align-items-center justify-content-center py-5 text-white">
                         <div class="spinner-border text-warning mb-3" role="status"></div>
-                        <span class="fw-semibold">Sedang merender halaman dokumen...</span>
+                        <span class="fw-semibold">Sedang merender isi dokumen...</span>
                         <small class="text-white-50 mt-1">Harap tunggu sebentar</small>
                     </div>
                     <div id="viewerError" class="d-none p-4 text-center"></div>
+                    
+                    {{-- Container for PDF canvas --}}
                     <div id="pdfPagesContainer" class="d-flex flex-column align-items-center"></div>
+
+                    {{-- Container for Excel sheets --}}
+                    <div id="excelContainer" class="d-none excel-container">
+                        <div id="excelTabsBar" class="excel-tabs-bar"></div>
+                        <div id="excelTableScroll" class="excel-table-scroll"></div>
+                    </div>
+
+                    {{-- Container for Word docx --}}
+                    <div id="docxContainer" class="d-none"></div>
                 </div>
 
                 {{-- FOOTER --}}
@@ -234,8 +326,15 @@
 @endsection
 
 @section('scripts')
-{{-- PDF.js library for Canvas rendering (no native PDF toolbar/download buttons) --}}
+{{-- 1. PDF.js for Canvas PDF rendering --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+{{-- 2. SheetJS for Excel rendering to HTML tables --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+{{-- 3. docx-preview for Word docx rendering --}}
+<script src="https://unpkg.com/docx-preview@0.3.3/dist/docx-preview.min.js"></script>
+
 <script>
     if (typeof pdfjsLib !== 'undefined') {
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
@@ -243,17 +342,30 @@
 
     let currentPdfDoc = null;
     let currentScale = 1.3;
+    let currentWorkbook = null;
 
     async function openViewer(url, title, ext) {
         const modalEl = document.getElementById('docViewerModal');
         const modalTitle = document.getElementById('docViewerModalLabel');
-        const container = document.getElementById('pdfPagesContainer');
+        const pdfContainer = document.getElementById('pdfPagesContainer');
+        const excelContainer = document.getElementById('excelContainer');
+        const docxContainer = document.getElementById('docxContainer');
         const loading = document.getElementById('viewerLoading');
         const errorBox = document.getElementById('viewerError');
         const pageIndicator = document.getElementById('pageIndicator');
+        const pdfControls = document.getElementById('pdfControls');
 
         modalTitle.innerText = title;
-        container.innerHTML = '';
+        pdfContainer.innerHTML = '';
+        docxContainer.innerHTML = '';
+        document.getElementById('excelTabsBar').innerHTML = '';
+        document.getElementById('excelTableScroll').innerHTML = '';
+
+        pdfContainer.classList.add('d-none');
+        excelContainer.classList.add('d-none');
+        docxContainer.classList.add('d-none');
+        pdfControls.classList.add('d-none');
+
         loading.classList.remove('d-none');
         errorBox.classList.add('d-none');
         pageIndicator.innerText = 'Memuat...';
@@ -261,45 +373,77 @@
         const modal = new bootstrap.Modal(modalEl);
         modal.show();
 
-        if (ext.toLowerCase() !== 'pdf') {
-            loading.classList.add('d-none');
-            errorBox.classList.remove('d-none');
-            errorBox.innerHTML = `
-                <div class="alert alert-info text-dark border-0 shadow-sm text-start" style="border-radius: 12px; max-width: 600px; margin: 0 auto;">
-                    <h6 class="fw-bold mb-2"><i class="bi bi-file-earmark-text text-primary me-2"></i>Dokumen Format ${ext}</h6>
-                    <p class="small text-muted mb-0">Dokumen ini berformat <strong>${ext}</strong>. Untuk menjaga keamanan arsip desa, dokumen hanya dapat dibaca langsung secara fisik di Kantor Desa Sebong Lagoi.</p>
-                </div>
-            `;
-            pageIndicator.innerText = 'Format ' + ext;
-            return;
-        }
+        const extLower = ext.toLowerCase();
 
         try {
-            const loadingTask = pdfjsLib.getDocument({
-                url: url,
-                cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/',
-                cMapPacked: true,
-            });
+            // 1. PDF RENDERER
+            if (extLower === 'pdf') {
+                pdfControls.classList.remove('d-none');
+                pdfContainer.classList.remove('d-none');
 
-            currentPdfDoc = await loadingTask.promise;
-            loading.classList.add('d-none');
-            pageIndicator.innerText = `Total ${currentPdfDoc.numPages} Halaman`;
+                const loadingTask = pdfjsLib.getDocument({
+                    url: url,
+                    cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/',
+                    cMapPacked: true,
+                });
 
-            await renderAllPages(currentPdfDoc, currentScale);
+                currentPdfDoc = await loadingTask.promise;
+                loading.classList.add('d-none');
+                pageIndicator.innerText = `Total ${currentPdfDoc.numPages} Halaman`;
+                await renderAllPages(currentPdfDoc, currentScale);
+
+            // 2. EXCEL RENDERER (XLSX, XLS, CSV)
+            } else if (['xlsx', 'xls', 'csv'].includes(extLower)) {
+                excelContainer.classList.remove('d-none');
+
+                const response = await fetch(url);
+                const arrayBuffer = await response.arrayBuffer();
+                currentWorkbook = XLSX.read(arrayBuffer, { type: 'array' });
+
+                loading.classList.add('d-none');
+                pageIndicator.innerText = `Excel: ${currentWorkbook.SheetNames.length} Lembar (Sheet)`;
+
+                renderExcelSheets(currentWorkbook);
+
+            // 3. WORD RENDERER (DOCX)
+            } else if (extLower === 'docx') {
+                docxContainer.classList.remove('d-none');
+
+                const response = await fetch(url);
+                const blob = await response.blob();
+
+                loading.classList.add('d-none');
+                pageIndicator.innerText = 'Dokumen Word';
+
+                await docx.renderAsync(blob, docxContainer);
+
+            // 4. LEGACY DOC OR OTHER FORMAT
+            } else {
+                loading.classList.add('d-none');
+                errorBox.classList.remove('d-none');
+                errorBox.innerHTML = `
+                    <div class="alert alert-info text-dark border-0 shadow-sm text-start" style="border-radius: 12px; max-width: 600px; margin: 0 auto;">
+                        <h6 class="fw-bold mb-2"><i class="bi bi-file-earmark-text text-primary me-2"></i>Dokumen Format .${ext}</h6>
+                        <p class="small text-muted mb-0">Dokumen format <strong>.${ext}</strong> lama tidak dapat dipratinjau langsung di peramban web. Untuk kenyamanan, kami sarankan mengonversinya ke format <strong>.docx</strong> atau <strong>.pdf</strong> saat mengunggah.</p>
+                    </div>
+                `;
+                pageIndicator.innerText = 'Format .' + ext;
+            }
         } catch (err) {
-            console.error('PDF.js Error:', err);
+            console.error('Document Viewer Error:', err);
             loading.classList.add('d-none');
             errorBox.classList.remove('d-none');
             errorBox.innerHTML = `
                 <div class="alert alert-danger border-0 shadow-sm text-start" style="border-radius: 12px; max-width: 600px; margin: 0 auto;">
                     <h6 class="fw-bold mb-1"><i class="bi bi-exclamation-triangle-fill me-2"></i>Gagal Memuat Dokumen</h6>
-                    <p class="small mb-0">Terjadi kesalahan saat memproses berkas. Pastikan format PDF valid.</p>
+                    <p class="small mb-0">Terjadi kesalahan saat memproses berkas dokumen ini.</p>
                 </div>
             `;
             pageIndicator.innerText = 'Gagal';
         }
     }
 
+    // PDF RENDER
     async function renderAllPages(pdfDoc, scale) {
         const container = document.getElementById('pdfPagesContainer');
         container.innerHTML = '';
@@ -331,6 +475,38 @@
             };
             await page.render(renderContext).promise;
         }
+    }
+
+    // EXCEL RENDER
+    function renderExcelSheets(workbook) {
+        const tabsBar = document.getElementById('excelTabsBar');
+        const tableScroll = document.getElementById('excelTableScroll');
+
+        tabsBar.innerHTML = '';
+        tableScroll.innerHTML = '';
+
+        workbook.SheetNames.forEach((sheetName, index) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'excel-tab-btn' + (index === 0 ? ' active' : '');
+            btn.innerText = sheetName;
+            btn.onclick = () => {
+                document.querySelectorAll('.excel-tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                displayExcelSheet(workbook.Sheets[sheetName]);
+            };
+            tabsBar.appendChild(btn);
+        });
+
+        if (workbook.SheetNames.length > 0) {
+            displayExcelSheet(workbook.Sheets[workbook.SheetNames[0]]);
+        }
+    }
+
+    function displayExcelSheet(worksheet) {
+        const tableScroll = document.getElementById('excelTableScroll');
+        const htmlTable = XLSX.utils.sheet_to_html(worksheet, { header: '', footer: '' });
+        tableScroll.innerHTML = htmlTable;
     }
 
     async function zoomIn() {

@@ -79,10 +79,10 @@
 
                         <input type="file" name="file_dokumen" id="file_dokumen"
                                class="form-control @error('file_dokumen') is-invalid @enderror"
-                               accept=".pdf,application/pdf"
+                               accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.csv"
                                style="border-radius: 10px;">
                         <div class="text-muted mt-1" style="font-size: 0.75rem;">
-                            <i class="bi bi-info-circle me-1 text-primary"></i>Biarkan kosong jika tidak ingin mengganti. <strong>Format: PDF (Maksimal 10 MB).</strong>
+                            <i class="bi bi-info-circle me-1 text-primary"></i>Biarkan kosong jika tidak ingin mengganti. Format: PDF, Word (DOCX/DOC), Excel (XLSX/XLS), PPT, CSV. Maksimal 20 MB.
                         </div>
                         @error('file_dokumen') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>

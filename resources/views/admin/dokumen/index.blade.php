@@ -47,17 +47,17 @@
                                 </td>
                                 <td><span class="text-muted small">{{ $dokumen->tahun }}</span></td>
                                 <td>
-                                    @php $ext = strtolower(pathinfo($dokumen->file_dokumen, PATHINFO_EXTENSION)); @endphp
-                                    @if($ext === 'pdf')
-                                        <a href="{{ route('dokumen.lihat', $dokumen->id) }}" target="_blank"
-                                           class="btn btn-outline-danger btn-sm px-2" style="border-radius: 6px;" title="Lihat PDF">
-                                            <i class="bi bi-filetype-pdf me-1"></i> PDF
-                                        </a>
-                                    @else
-                                        <span class="badge bg-secondary text-uppercase" title="Format non-PDF">
-                                            <i class="bi bi-file-earmark me-1"></i> {{ $ext }}
-                                        </span>
-                                    @endif
+                                    @php 
+                                        $ext = strtolower(pathinfo($dokumen->file_dokumen, PATHINFO_EXTENSION));
+                                        $isPdf = $ext === 'pdf';
+                                        $isExcel = in_array($ext, ['xls', 'xlsx', 'csv']);
+                                        $isWord = in_array($ext, ['doc', 'docx']);
+                                        $badgeColor = $isPdf ? 'danger' : ($isExcel ? 'success' : ($isWord ? 'primary' : 'secondary'));
+                                        $icon = $isPdf ? 'filetype-pdf' : ($isExcel ? 'filetype-xlsx' : ($isWord ? 'filetype-docx' : 'file-earmark'));
+                                    @endphp
+                                    <span class="badge bg-{{ $badgeColor }} bg-opacity-10 text-{{ $badgeColor }} border border-{{ $badgeColor }} border-opacity-25 px-2 py-1 text-uppercase">
+                                        <i class="bi bi-{{ $icon }} me-1"></i> {{ $ext }}
+                                    </span>
                                 </td>
                                 <td><span class="text-muted small">{{ $dokumen->created_at->format('d M Y') }}</span></td>
                                 <td class="pe-4 text-end">

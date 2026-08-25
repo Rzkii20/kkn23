@@ -30,10 +30,10 @@ class DokumenController extends Controller
             'kategori'     => 'required|string|max:100',
             'deskripsi'    => 'nullable|string|max:500',
             'tahun'        => 'required|integer|min:2000|max:' . (date('Y') + 1),
-            'file_dokumen' => 'required|file|mimes:pdf|max:20480',
+            'file_dokumen' => 'required|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,csv|max:20480',
         ], [
-            'file_dokumen.mimes' => 'File harus berformat PDF agar dapat dibaca secara aman di web tanpa bisa diunduh.',
-            'file_dokumen.max'   => 'Ukuran file PDF maksimal 20 MB.',
+            'file_dokumen.mimes' => 'Format file yang didukung: PDF, Word (DOC/DOCX), Excel (XLS/XLSX), PPT, dan CSV.',
+            'file_dokumen.max'   => 'Ukuran file dokumen maksimal 20 MB.',
         ]);
 
         $filePath = $request->file('file_dokumen')->store('dokumen', 'public');
@@ -62,10 +62,10 @@ class DokumenController extends Controller
             'kategori'     => 'required|string|max:100',
             'deskripsi'    => 'nullable|string|max:500',
             'tahun'        => 'required|integer|min:2000|max:' . (date('Y') + 1),
-            'file_dokumen' => 'nullable|file|mimes:pdf|max:20480',
+            'file_dokumen' => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,csv|max:20480',
         ], [
-            'file_dokumen.mimes' => 'File harus berformat PDF agar dapat dibaca secara aman di web tanpa bisa diunduh.',
-            'file_dokumen.max'   => 'Ukuran file PDF maksimal 20 MB.',
+            'file_dokumen.mimes' => 'Format file yang didukung: PDF, Word (DOC/DOCX), Excel (XLS/XLSX), PPT, dan CSV.',
+            'file_dokumen.max'   => 'Ukuran file dokumen maksimal 20 MB.',
         ]);
 
         $filePath = $dokumen->file_dokumen;
