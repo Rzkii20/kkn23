@@ -33,11 +33,5 @@
     RewriteRule ^ index.php [L]
 </IfModule>
 
-# Increase upload limit for Apache mod_php
-<IfModule mod_php.c>
-    php_value upload_max_filesize 20M
-    php_value post_max_size 25M
-    php_value memory_limit 256M
-</IfModule>
 
 
