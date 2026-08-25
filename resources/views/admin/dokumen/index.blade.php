@@ -48,8 +48,8 @@
                                 <td><span class="text-muted small">{{ $dokumen->tahun }}</span></td>
                                 <td>
                                     @php $ext = pathinfo($dokumen->file_dokumen, PATHINFO_EXTENSION); @endphp
-                                    <a href="{{ asset('storage/' . $dokumen->file_dokumen) }}" target="_blank"
-                                       class="btn btn-outline-secondary btn-sm px-2" style="border-radius: 6px;" title="Unduh / Lihat File">
+                                    <a href="{{ route('dokumen.lihat', $dokumen->id) }}" target="_blank"
+                                       class="btn btn-outline-secondary btn-sm px-2" style="border-radius: 6px;" title="Lihat Dokumen">
                                         <i class="bi bi-{{ $ext === 'pdf' ? 'filetype-pdf' : 'file-earmark-text' }} me-1"></i>
                                         {{ strtoupper($ext) }}
                                     </a>

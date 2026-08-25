@@ -53,6 +53,7 @@ Route::post('/kontak', [KontakController::class, 'store'])->name('kontak.store')
 
 // Halaman Dokumen & Administrasi Publik
 Route::get('/dokumen', [DokumenPublikController::class, 'index'])->name('dokumen.index');
+Route::get('/dokumen/lihat/{dokumen}', [DokumenPublikController::class, 'lihat'])->name('dokumen.lihat');
 
 // Auth Routes (GUEST) — hanya login, tidak ada register publik
 Route::middleware('guest')->group(function () {
