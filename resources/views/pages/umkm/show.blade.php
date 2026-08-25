@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
-@section('title', $umkm->nama_usaha . ' - UMKM Desa Sebong Lagoi')
+@section('title', $umkm->nama_usaha . ' - Profil Mitra UMKM Desa Sebong Lagoi')
+@section('meta_description', Str::limit(strip_tags($umkm->deskripsi ?? 'Profil usaha ' . $umkm->nama_usaha . ' di Desa Sebong Lagoi, Teluk Sebong, Bintan.'), 160))
+@section('og_image', $umkm->foto_usaha ? asset('storage/' . $umkm->foto_usaha) : asset('images/logo-bintan.png'))
+@section('og_type', 'business.business')
 
 @section('styles')
     <!-- Leaflet Map CSS -->

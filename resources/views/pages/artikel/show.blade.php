@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
-@section('title', $artikel->judul . ' - Desa Sebong Lagoi')
+@section('title', $artikel->judul . ' - Berita Desa Sebong Lagoi')
+@section('meta_description', Str::limit(strip_tags($artikel->konten), 155))
+@section('og_image', $artikel->gambar ? asset('storage/' . $artikel->gambar) : asset('images/logo-bintan.png'))
+@section('og_type', 'article')
 
 @section('content')
     <div class="bg-light py-3 border-bottom">

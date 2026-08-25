@@ -1,2 +1,9 @@
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /admin/
+Disallow: /mitra/
+Disallow: /login
+Disallow: /storage/dokumen/
+
+# Sitemap
+Sitemap: https://sebonglagoi.com/sitemap.xml

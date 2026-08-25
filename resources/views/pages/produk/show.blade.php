@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
-@section('title', $produk->nama_produk . ' - Katalog Produk UMKM Desa Sebong Lagoi')
-@section('meta_description', Str::limit($produk->deskripsi, 160))
+@section('title', $produk->nama_produk . ' - Produk UMKM Desa Sebong Lagoi')
+@section('meta_description', Str::limit(strip_tags($produk->deskripsi), 160))
+@section('og_image', $produk->foto_produk ? asset('storage/' . $produk->foto_produk) : asset('images/logo-bintan.png'))
+@section('og_type', 'product')
 
 @section('content')
 

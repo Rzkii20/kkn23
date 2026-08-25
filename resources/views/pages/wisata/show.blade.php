@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
-@section('title', $wisata->nama_wisata . ' - Wisata Desa Sebong Lagoi')
+@section('title', $wisata->nama_wisata . ' - Wisata Desa Sebong Lagoi, Bintan')
+@section('meta_description', Str::limit(strip_tags($wisata->deskripsi), 160))
+@section('og_image', $wisata->foto_wisata ? asset('storage/' . $wisata->foto_wisata) : asset('images/logo-bintan.png'))
+@section('og_type', 'place')
 
 @section('content')
     <div class="bg-light py-3 border-bottom">

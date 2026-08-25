@@ -5,7 +5,11 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VillageController;
 use App\Http\Controllers\Admin\PengaturanController;
 use App\Http\Controllers\DokumenPublikController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
+
+// XML Sitemap untuk Google & Search Engine
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 // Halaman Utama / Landing Page
 Route::get('/', [HomeController::class, 'index'])->name('home');

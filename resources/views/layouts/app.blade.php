@@ -1,10 +1,80 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sistem Informasi Promosi & Pemasaran UMKM Desa Sebong Lagoi, Bintan - Temukan produk lokal unggulan dan destinasi wisata terbaik.">
-    <title>@yield('title', 'Desa Sebong Lagoi - UMKM & Wisata Terbaik')</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    {{-- SEO Primary Meta Tags --}}
+    <title>@yield('title', 'Desa Sebong Lagoi - Sistem Informasi UMKM & Potensi Desa')</title>
+    <meta name="title" content="@yield('title', 'Desa Sebong Lagoi - Sistem Informasi UMKM & Potensi Desa')">
+    <meta name="description" content="@yield('meta_description', 'Portal Resmi Sistem Informasi Promosi & Pemasaran UMKM serta Potensi Wisata dan Administrasi Desa Sebong Lagoi, Kecamatan Teluk Sebong, Kabupaten Bintan, Kepulauan Riau.')">
+    <meta name="keywords" content="@yield('meta_keywords', 'Desa Sebong Lagoi, UMKM Sebong Lagoi, Wisata Bintan, Teluk Sebong, Kepulauan Riau, Produk Lokal Bintan, Kerajinan Bintan, Oleh-oleh Bintan, Wisata Mangrove, Pemerintahan Desa Sebong Lagoi')">
+    <meta name="author" content="Pemerintah Desa Sebong Lagoi">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    {{-- Favicon & App Icons --}}
+    <link rel="icon" type="image/png" href="{{ asset('images/logo-bintan.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/logo-bintan.png') }}">
+    <meta name="theme-color" content="#003049">
+
+    {{-- Open Graph / Facebook / WhatsApp --}}
+    <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:site_name" content="Desa Sebong Lagoi">
+    <meta property="og:title" content="@yield('og_title', View::yieldContent('title', 'Desa Sebong Lagoi - Sistem Informasi UMKM & Potensi Desa'))">
+    <meta property="og:description" content="@yield('meta_description', 'Portal Resmi Sistem Informasi Promosi & Pemasaran UMKM serta Potensi Wisata Desa Sebong Lagoi, Kabupaten Bintan.')">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="@yield('og_image', asset('images/logo-bintan.png'))">
+    <meta property="og:image:alt" content="Logo Desa Sebong Lagoi, Bintan">
+
+    {{-- Twitter Cards --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('og_title', View::yieldContent('title', 'Desa Sebong Lagoi - Sistem Informasi UMKM & Potensi Desa'))">
+    <meta name="twitter:description" content="@yield('meta_description', 'Portal Resmi Sistem Informasi Promosi & Pemasaran UMKM serta Potensi Wisata Desa Sebong Lagoi, Kabupaten Bintan.')">
+    <meta name="twitter:image" content="@yield('og_image', asset('images/logo-bintan.png'))">
+
+    {{-- Structured Data (Schema.org JSON-LD) --}}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "GovernmentOrganization",
+          "@id": "{{ url('/') }}#organization",
+          "name": "Pemerintah Desa Sebong Lagoi",
+          "url": "{{ url('/') }}",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "{{ asset('images/logo-bintan.png') }}"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Jl. Pancamarga No. 3A",
+            "addressLocality": "Kecamatan Teluk Sebong",
+            "addressRegion": "Kabupaten Bintan",
+            "postalCode": "29152",
+            "addressCountry": "ID"
+          },
+          "telephone": "+6281261554737",
+          "email": "sebonglagoi11@gmail.com"
+        },
+        {
+          "@type": "WebSite",
+          "@id": "{{ url('/') }}#website",
+          "url": "{{ url('/') }}",
+          "name": "Desa Sebong Lagoi",
+          "description": "Sistem Informasi Promosi UMKM & Potensi Desa Sebong Lagoi, Bintan",
+          "publisher": {
+            "@id": "{{ url('/') }}#organization"
+          },
+          "inLanguage": "id-ID"
+        }
+      ]
+    }
+    </script>
+
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->

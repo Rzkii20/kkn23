@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
-@section('title', $event->nama_event . ' - Event Desa Sebong Lagoi')
+@section('title', $event->nama_event . ' - Agenda Event Desa Sebong Lagoi')
+@section('meta_description', Str::limit(strip_tags($event->deskripsi), 160))
+@section('og_image', $event->foto_event ? asset('storage/' . $event->foto_event) : asset('images/logo-bintan.png'))
+@section('og_type', 'event')
 
 @section('content')
     <div class="bg-light py-3 border-bottom">
