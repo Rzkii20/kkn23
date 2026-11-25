@@ -127,7 +127,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center gap-1">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-1">
                     <li class="nav-item">
                         <a class="nav-link {{ Route::is('home') ? 'active' : '' }}" href="{{ route('home') }}">Beranda</a>
                     </li>
@@ -147,8 +147,8 @@
                             UMKM <i class="bi bi-chevron-down nav-caret" aria-hidden="true"></i>
                         </a>
                         <ul class="dropdown-menu border-0 shadow" aria-labelledby="navbarUmkm">
-                            <li><a class="dropdown-item" href="/umkm">Daftar UMKM</a></li>
-                            <li><a class="dropdown-item" href="/produk">Katalog Produk</a></li>
+                            <li><a class="dropdown-item" href="/umkm"><i class="bi bi-shop me-2 text-muted"></i>Daftar UMKM</a></li>
+                            <li><a class="dropdown-item" href="/produk"><i class="bi bi-bag-check me-2 text-muted"></i>Katalog Produk</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -159,9 +159,9 @@
                             Informasi <i class="bi bi-chevron-down nav-caret" aria-hidden="true"></i>
                         </a>
                         <ul class="dropdown-menu border-0 shadow" aria-labelledby="navbarInformasi">
-                            <li><a class="dropdown-item" href="/artikel">Artikel & Berita</a></li>
-                            <li><a class="dropdown-item" href="/event">Event Desa</a></li>
-                            <li><a class="dropdown-item" href="/dokumen">Dokumen & Administrasi</a></li>
+                            <li><a class="dropdown-item" href="/artikel"><i class="bi bi-newspaper me-2 text-muted"></i>Artikel &amp; Berita</a></li>
+                            <li><a class="dropdown-item" href="/event"><i class="bi bi-calendar-event me-2 text-muted"></i>Event Desa</a></li>
+                            <li><a class="dropdown-item" href="/dokumen"><i class="bi bi-file-earmark-text me-2 text-muted"></i>Dokumen &amp; Administrasi</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -393,7 +393,7 @@
             }
             // Jalankan langsung saat halaman dimuat
             updateNavbar();
-            window.addEventListener('scroll', updateNavbar);
+            window.addEventListener('scroll', updateNavbar, { passive: true });
         }
 
         // Scroll reveal
@@ -402,6 +402,7 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.1 });

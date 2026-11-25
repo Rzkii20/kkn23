@@ -352,9 +352,9 @@
 
                     <div class="ed-anggota-label reveal">Perangkat Desa</div>
 
-                    <div class="row g-4 justify-content-center">
+                    <div class="row g-3 g-md-4 justify-content-center">
                         @foreach($anggota as $item)
-                            <div class="col-xl-3 col-lg-4 col-md-6 reveal">
+                            <div class="col-6 col-xl-3 col-lg-4 col-md-6 reveal">
                                 <div class="ed-anggota-card">
                                     <span class="ed-anggota-badge">{{ $item->jabatan }}</span>
                                     <div>

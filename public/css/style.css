@@ -3759,20 +3759,81 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 991px) {
     .navbar-collapse {
         background: var(--navy);
-        padding: 16px;
-        border-radius: 12px;
+        padding: 12px;
+        border-radius: 16px;
         border: 1px solid rgba(255, 255, 255, 0.14);
         margin-top: 12px;
-        box-shadow: 0 18px 40px rgba(5, 11, 28, 0.4);
+        box-shadow: 0 22px 50px rgba(5, 11, 28, 0.45);
+    }
+
+    .navbar-custom .navbar-nav {
+        width: 100%;
+        align-items: stretch !important;
+        gap: 2px !important;
+    }
+
+    .navbar-custom .nav-item {
+        width: 100%;
+        margin: 0 !important;
     }
 
     .navbar-custom .nav-link {
-        padding: 10px 8px !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 12px 14px !important;
+        border-radius: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        font-size: 0.94rem;
+        font-weight: 600;
+    }
+
+    .navbar-custom .nav-link:hover,
+    .navbar-custom .nav-link.active,
+    .navbar-custom .nav-link.dropdown-toggle.show {
+        background: rgba(255, 255, 255, 0.07);
+        color: var(--white);
+    }
+
+    .navbar-custom .nav-link.dropdown-toggle {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
     }
 
     .navbar-custom .nav-link::after {
         display: none;
+    }
+
+    .navbar-custom .dropdown-menu {
+        background: rgba(255, 255, 255, 0.05);
+        border: none !important;
+        border-left: 2px solid var(--hot-pink) !important;
+        box-shadow: none !important;
+        border-radius: 0 10px 10px 0;
+        margin: 4px 8px 10px 14px;
+        padding: 6px;
+    }
+
+    .navbar-custom .dropdown-item {
+        color: rgba(255, 255, 255, 0.86);
+        padding: 10px 12px;
+        border-radius: 8px;
+        font-size: 0.88rem;
+        display: flex;
+        align-items: center;
+        gap: 2px;
+    }
+
+    .navbar-custom .dropdown-item i {
+        color: var(--hot-pink) !important;
+    }
+
+    .navbar-custom .dropdown-item:hover,
+    .navbar-custom .dropdown-item:focus {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--white);
     }
 
     .btn-admin-nav {
@@ -3864,17 +3925,80 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .tab-collage {
-        grid-template-columns: 1fr;
-        max-width: 480px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        max-width: 100%;
+        padding: 10px 6px 14px;
+    }
+
+    .tab-center-card {
+        grid-column: 1 / -1;
+        order: -1;
+        z-index: 3;
+        width: 100%;
+        max-width: 82%;
+        margin: 0 auto;
+        padding: 8px;
+        border-radius: 14px;
+    }
+
+    .tab-center-top {
+        font-size: 0.68rem;
+        padding: 2px 4px 6px;
+    }
+
+    .tab-center-media {
+        aspect-ratio: 16 / 8.5;
+        border-radius: 10px;
     }
 
     .tab-side-card {
-        display: none;
+        display: block;
+        border-width: 3px;
+        border-radius: 14px;
+        aspect-ratio: 4 / 3.5;
+        margin-top: -14px;
+        z-index: 1;
+    }
+
+    .tab-side-card.left {
+        transform: rotate(-3deg);
+    }
+
+    .tab-side-card.right {
+        transform: rotate(3deg);
+    }
+
+    .tab-float-chip {
+        left: 8px;
+        right: 8px;
+        bottom: 8px;
+        padding: 7px 8px;
+        gap: 7px;
+        border-radius: 10px;
+    }
+
+    .tab-chip-icon {
+        width: 26px;
+        height: 26px;
+        font-size: 0.78rem;
+        border-radius: 7px;
+    }
+
+    .tab-chip-title {
+        font-size: 0.68rem;
+    }
+
+    .tab-chip-sub {
+        font-size: 0.6rem;
     }
 
     .tab-pink-sticker {
-        top: -14px;
-        right: 8px;
+        top: -10px;
+        right: -10px;
+        width: 54px;
+        height: 54px;
+        font-size: 0.58rem;
     }
 
     .ed-checker-section {
@@ -3886,7 +4010,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .ed-checker-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 12px;
     }
 
@@ -3907,28 +4031,31 @@ h1, h2, h3, h4, h5, h6 {
 
     .ed-bento-row-mid,
     .ed-bento-row-bot {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
         height: auto;
     }
 
     .ed-bento-row-mid .ed-bento-card,
     .ed-bento-row-bot .ed-bento-card {
-        aspect-ratio: 16 / 10;
+        aspect-ratio: 4 / 3;
         height: auto;
     }
 
     .ed-showcase-grid {
-        grid-template-columns: 1fr;
-        max-width: 460px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        max-width: 100%;
     }
 
     .ed-story-grid {
-        grid-template-columns: 1fr;
-        max-width: 440px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        max-width: 100%;
     }
 
     .ed-story-card {
-        min-height: 360px;
+        min-height: 240px;
     }
 
     .ed-section,
@@ -3941,7 +4068,8 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .ed-wisata-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
     }
 
     .ed-wisata-card,
@@ -3991,6 +4119,173 @@ h1, h2, h3, h4, h5, h6 {
 
     .ed-about-photo-card img {
         height: 260px;
+    }
+}
+
+@media (max-width: 575px) {
+    .container.ed-container,
+    .ed-container,
+    .footer-custom .container {
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+    }
+
+    /* Compact 2-column showcase cards (Landing Section 4) */
+    .ed-showcase-card {
+        min-width: 0;
+        overflow: hidden;
+        padding: 6px;
+        border-radius: 16px;
+    }
+
+    .ed-showcase-top {
+        min-width: 0;
+        padding: 10px;
+        border-radius: 12px;
+    }
+
+    .ed-showcase-meta {
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-bottom: 10px;
+        font-size: 0.68rem;
+    }
+
+    .ed-showcase-meta-left {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        gap: 4px;
+    }
+
+    .ed-featured-badge {
+        font-size: 0.58rem;
+        padding: 2px 7px;
+    }
+
+    .ed-showcase-thumb {
+        aspect-ratio: 4 / 3;
+        margin-bottom: 10px;
+        border-radius: 10px;
+    }
+
+    .ed-showcase-name {
+        font-size: 0.86rem;
+        margin-bottom: 4px;
+    }
+
+    .ed-showcase-price-row {
+        gap: 2px 4px;
+        margin-bottom: 10px;
+    }
+
+    .ed-showcase-price {
+        font-size: 0.96rem;
+    }
+
+    .ed-showcase-unit {
+        font-size: 0.68rem;
+    }
+
+    .ed-sc-btn-light,
+    .ed-sc-btn-white,
+    .ed-sc-btn-navy {
+        font-size: 0.74rem;
+        padding: 8px 10px;
+    }
+
+    .ed-showcase-body {
+        padding: 12px 6px 6px;
+    }
+
+    .ed-showcase-list {
+        gap: 7px;
+        font-size: 0.72rem;
+        margin-bottom: 10px;
+    }
+
+    .ed-showcase-list li {
+        gap: 6px;
+        line-height: 1.38;
+    }
+
+    .ed-showcase-list li i {
+        font-size: 0.78rem;
+    }
+
+    /* Compact 2-column story & bento cards */
+    .ed-story-card {
+        padding: 14px;
+        border-radius: 14px;
+        min-height: 210px;
+    }
+
+    .ed-story-title {
+        font-size: 0.88rem;
+    }
+
+    .ed-story-meta {
+        font-size: 0.68rem;
+    }
+
+    .ed-bento-hover {
+        padding: 14px;
+    }
+
+    .ed-bento-hover-title {
+        font-size: 0.88rem;
+    }
+
+    .ed-bento-hover-desc {
+        display: none;
+    }
+
+    /* Compact 2-column subpage product, UMKM, and wisata cards */
+    .ed-product-card,
+    .ed-umkm-card,
+    .w-card {
+        border-radius: 12px;
+    }
+
+    .ed-product-img,
+    .ed-umkm-thumb,
+    .w-card-thumb {
+        height: 135px;
+    }
+
+    .ed-product-body,
+    .ed-umkm-body,
+    .w-card-body {
+        padding: 12px;
+    }
+
+    .ed-product-title,
+    .ed-umkm-name,
+    .w-card-title {
+        font-size: 0.88rem;
+        line-height: 1.3;
+    }
+
+    .ed-product-price {
+        font-size: 0.88rem;
+    }
+
+    .ed-product-foot,
+    .ed-umkm-foot,
+    .w-card-foot {
+        padding: 10px 12px;
+    }
+
+    .ed-product-link,
+    .ed-umkm-link,
+    .w-card-link {
+        font-size: 0.76rem;
+    }
+
+    .w-card-desc,
+    .ed-umkm-desc {
+        font-size: 0.76rem;
+        margin-bottom: 8px;
     }
 }
 

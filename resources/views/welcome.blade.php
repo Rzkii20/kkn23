@@ -517,7 +517,7 @@
                             </div>
 
                             <div class="ed-showcase-thumb">
-                                <img src="{{ $sp['img'] }}" alt="{{ $sp['name'] }}">
+                                <img src="{{ $sp['img'] }}" alt="{{ $sp['name'] }}" loading="lazy" decoding="async">
                             </div>
 
                             <h3 class="ed-showcase-name">{{ $sp['name'] }}</h3>
@@ -678,7 +678,7 @@
             <div class="ed-story-grid reveal">
                 @foreach($storyArtikels as $sa)
                     <a href="{{ $sa['url'] }}" class="ed-story-card">
-                        <img src="{{ $sa['img'] }}" alt="{{ $sa['title'] }}" class="ed-story-bg">
+                        <img src="{{ $sa['img'] }}" alt="{{ $sa['title'] }}" class="ed-story-bg" loading="lazy" decoding="async">
                         <div class="ed-story-scrim"></div>
 
                         <div class="ed-story-top">

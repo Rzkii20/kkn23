@@ -168,9 +168,9 @@
             </div>
 
             @if($produks->isNotEmpty())
-                <div class="row g-4">
+                <div class="row g-3 g-md-4">
                     @foreach($produks as $produk)
-                        <div class="col-12 col-sm-6 col-lg-3 reveal">
+                        <div class="col-6 col-sm-6 col-lg-3 reveal">
                             <div class="ed-product-card">
                                 <div class="ed-product-img">
                                     <img src="{{ $produk->foto_produk ? asset('storage/' . $produk->foto_produk) : asset('images/tentang-desa.jpg') }}"

@@ -378,9 +378,9 @@
                     </a>
                 </div>
 
-                <div class="row g-4">
+                <div class="row g-3 g-md-4">
                     @foreach($related as $rel)
-                        <div class="col-12 col-md-6 col-lg-4 reveal">
+                        <div class="col-6 col-md-6 col-lg-4 reveal">
                             <div class="w-card">
                                 <div class="w-card-thumb">
                                     <img src="{{ $rel->foto_wisata ? asset('storage/' . $rel->foto_wisata) : asset('images/tentang-desa.jpg') }}"

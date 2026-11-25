@@ -195,6 +195,64 @@
             grid-template-columns: 1fr;
         }
     }
+
+    @media (max-width: 575px) {
+        .ev-card {
+            border-radius: 12px;
+        }
+
+        .ev-date-badge {
+            top: 8px;
+            left: 8px;
+            width: 44px;
+            border-radius: 8px;
+        }
+
+        .ev-date-month {
+            font-size: 0.58rem;
+        }
+
+        .ev-date-day {
+            font-size: 1rem;
+        }
+
+        .ev-body {
+            padding: 12px;
+        }
+
+        .ev-title {
+            font-size: 0.88rem;
+            margin-bottom: 8px;
+        }
+
+        .ev-meta {
+            font-size: 0.72rem;
+            margin-bottom: 8px;
+        }
+
+        .ev-desc {
+            font-size: 0.76rem;
+        }
+
+        .ev-foot {
+            padding: 10px 12px;
+        }
+
+        .ev-link {
+            font-size: 0.76rem;
+        }
+
+        .ev-past-card {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 10px;
+        }
+
+        .ev-past-card img {
+            width: 100%;
+            height: 96px;
+        }
+    }
 </style>
 @endsection
 
@@ -261,9 +319,9 @@
             </div>
 
             @if($events->isNotEmpty())
-                <div class="row g-4">
+                <div class="row g-3 g-md-4">
                     @foreach($events as $event)
-                        <div class="col-12 col-md-6 col-lg-4 reveal">
+                        <div class="col-6 col-md-6 col-lg-4 reveal">
                             <div class="ev-card">
                                 <div class="ev-thumb">
                                     <img src="{{ $event->foto_event ? asset('storage/' . $event->foto_event) : asset('images/tentang-desa.jpg') }}"
@@ -356,9 +414,9 @@
                     </div>
                 </div>
 
-                <div class="row g-4">
+                <div class="row g-3 g-md-4">
                     @foreach($pastEvents as $past)
-                        <div class="col-md-4 reveal">
+                        <div class="col-6 col-md-4 reveal">
                             <a href="{{ route('event.show', $past->slug) }}" class="ev-past-card">
                                 <img src="{{ $past->foto_event ? asset('storage/' . $past->foto_event) : asset('images/tentang-desa.jpg') }}"
                                      alt="{{ $past->nama_event }}">

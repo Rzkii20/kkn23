@@ -313,6 +313,40 @@
             background: var(--bg-alt);
             border-radius: 12px;
         }
+
+        @media (max-width: 575px) {
+            .u-produk-card {
+                border-radius: 12px;
+            }
+
+            .u-produk-img {
+                height: 135px;
+            }
+
+            .u-produk-body {
+                padding: 12px;
+            }
+
+            .u-produk-name {
+                font-size: 0.88rem;
+            }
+
+            .u-produk-price {
+                font-size: 0.9rem;
+            }
+
+            .u-produk-desc {
+                font-size: 0.76rem;
+            }
+
+            .u-produk-foot {
+                padding: 10px 12px;
+            }
+
+            .u-produk-link {
+                font-size: 0.76rem;
+            }
+        }
     </style>
 @endsection
 
@@ -501,9 +535,9 @@
             </div>
 
             @if($produks->isNotEmpty())
-                <div class="row g-4">
+                <div class="row g-3 g-md-4">
                     @foreach($produks as $produk)
-                        <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="col-6 col-sm-6 col-lg-3">
                             <div class="u-produk-card">
                                 <div class="u-produk-img">
                                     <img src="{{ $produk->foto_produk ? asset('storage/' . $produk->foto_produk) : asset('images/tentang-desa.jpg') }}"

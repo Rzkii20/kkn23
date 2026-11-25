@@ -69,9 +69,9 @@
             </div>
 
             @if($umkms->isNotEmpty())
-                <div class="row g-4">
+                <div class="row g-3 g-md-4">
                     @foreach($umkms as $umkm)
-                        <div class="col-12 col-sm-6 col-lg-3 reveal">
+                        <div class="col-6 col-sm-6 col-lg-3 reveal">
                             <div class="ed-umkm-card">
                                 <div class="ed-umkm-thumb">
                                     <img src="{{ $umkm->foto_toko ? asset('storage/' . $umkm->foto_toko) : asset('images/tentang-desa.jpg') }}"

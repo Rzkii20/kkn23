@@ -118,13 +118,22 @@
     @media (max-width: 767px) {
         .gal-masonry {
             column-count: 2;
-            column-gap: 14px;
+            column-gap: 12px;
         }
     }
 
     @media (max-width: 575px) {
-        .gal-masonry {
-            column-count: 1;
+        .gal-pin {
+            margin-bottom: 12px;
+            border-radius: 12px;
+        }
+
+        .gal-pin-rest {
+            padding: 12px;
+        }
+
+        .gal-pin-rest-title {
+            font-size: 0.74rem;
         }
     }
 

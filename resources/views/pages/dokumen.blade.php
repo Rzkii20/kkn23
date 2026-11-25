@@ -387,6 +387,33 @@
             grid-template-columns: 1fr;
         }
     }
+
+    @media (max-width: 575px) {
+        .doc-card {
+            padding: 14px;
+            border-radius: 12px;
+        }
+
+        .doc-icon-box {
+            width: 36px;
+            height: 36px;
+            font-size: 1rem;
+            border-radius: 10px;
+        }
+
+        .doc-title {
+            font-size: 0.84rem;
+        }
+
+        .doc-desc {
+            font-size: 0.76rem;
+        }
+
+        .doc-read-btn {
+            padding: 8px 10px;
+            font-size: 0.76rem;
+        }
+    }
 </style>
 @endsection
 
@@ -535,7 +562,7 @@
                             <span class="doc-cat-count">{{ $items->count() }} dokumen</span>
                         </div>
 
-                        <div class="row g-4">
+                        <div class="row g-3 g-md-4">
                             @foreach($items as $dokumen)
                                 @php
                                     $ext = strtoupper(pathinfo($dokumen->file_dokumen, PATHINFO_EXTENSION));
@@ -545,7 +572,7 @@
                                     $toneClass = $isPdf ? 'is-pdf' : ($isExcel ? 'is-xlsx' : ($isWord ? 'is-docx' : 'is-other'));
                                     $iconName = $isPdf ? 'filetype-pdf' : ($isExcel ? 'filetype-xlsx' : ($isWord ? 'filetype-docx' : 'file-earmark-text'));
                                 @endphp
-                                <div class="col-md-6 col-lg-4 reveal">
+                                <div class="col-6 col-md-6 col-lg-4 reveal">
                                     <div class="doc-card">
                                         <div>
                                             <div class="d-flex align-items-start gap-3">
