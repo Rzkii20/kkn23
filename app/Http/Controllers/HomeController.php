@@ -27,11 +27,11 @@ class HomeController extends Controller
             ->get();
             
         $wisatas = Wisata::latest()
-            ->take(3)
+            ->take(5)
             ->get();
             
         $artikels = Artikel::latest()
-            ->take(3)
+            ->take(6)
             ->get();
             
         $events = Event::latest()
@@ -43,12 +43,18 @@ class HomeController extends Controller
         $statsProduk  = Produk::count();
         $statsWisata  = Wisata::count();
 
+        // Mitra UMKM aktif untuk etalase partner
+        $homeUmkms = Umkm::where('status_aktif', true)
+            ->latest()
+            ->take(8)
+            ->get();
+
         // Kategori dari database
         $homeKategoris = KategoriProduk::withCount('produk')->get();
 
         return view('welcome', compact(
             'sliders', 'produks', 'wisatas', 'artikels', 'events',
-            'statsUmkm', 'statsProduk', 'statsWisata', 'homeKategoris'
+            'statsUmkm', 'statsProduk', 'statsWisata', 'homeUmkms', 'homeKategoris'
         ));
     }
 }

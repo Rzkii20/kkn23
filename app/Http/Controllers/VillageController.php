@@ -19,23 +19,35 @@ class VillageController extends Controller
     {
         $mangrove = \App\Models\Wisata::where('nama_wisata', 'like', '%mangrove%')
             ->whereNotNull('foto_wisata')
-            ->first();
+            ->first()
+            ?? \App\Models\Wisata::whereNotNull('foto_wisata')->first();
 
-        $hasilLaut = \App\Models\Produk::where(function($q) {
+        $hasilLaut = \App\Models\Produk::where(function ($q) {
             $q->where('nama_produk', 'like', '%ikan%')
               ->orWhere('nama_produk', 'like', '%laut%')
               ->orWhere('nama_produk', 'like', '%udang%')
               ->orWhere('nama_produk', 'like', '%kepiting%')
-              ->orWhere('nama_produk', 'like', '%otak%');
-        })->whereNotNull('foto_produk')->first();
+              ->orWhere('nama_produk', 'like', '%otak%')
+              ->orWhere('nama_produk', 'like', '%bilis%');
+        })->whereNotNull('foto_produk')->first()
+            ?? \App\Models\Produk::whereNotNull('foto_produk')->first();
 
-        $kerajinan = \App\Models\Produk::whereHas('kategori', function($q) {
+        $kerajinan = \App\Models\Produk::whereHas('kategori', function ($q) {
             $q->where('nama_kategori', 'like', '%kerajinan%')
               ->orWhere('nama_kategori', 'like', '%kriya%')
               ->orWhere('nama_kategori', 'like', '%tangan%');
-        })->whereNotNull('foto_produk')->first();
+        })->whereNotNull('foto_produk')->first()
+            ?? \App\Models\Produk::whereNotNull('foto_produk')
+                ->when($hasilLaut, fn ($q) => $q->where('id', '!=', $hasilLaut->id))
+                ->first();
 
-        return view('pages.potential', compact('mangrove', 'hasilLaut', 'kerajinan'));
+        $stats = [
+            'wisata' => \App\Models\Wisata::count(),
+            'umkm' => \App\Models\Umkm::count(),
+            'produk' => \App\Models\Produk::count(),
+        ];
+
+        return view('pages.potential', compact('mangrove', 'hasilLaut', 'kerajinan', 'stats'));
     }
 
     /**
