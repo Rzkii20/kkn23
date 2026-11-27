@@ -347,6 +347,332 @@
                 font-size: 0.76rem;
             }
         }
+
+        /* Clean Minimal Share & QR Modal */
+        .u-qr-modal-content {
+            background: var(--white);
+            border: 1px solid var(--border-hairline);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(15, 27, 61, 0.14);
+        }
+
+        .u-qr-modal-head {
+            background: var(--white);
+            color: var(--navy);
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-hairline);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .u-qr-modal-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin: 0;
+            line-height: 1.25;
+        }
+
+        .u-qr-modal-sub {
+            display: block;
+            font-size: 0.76rem;
+            color: var(--ink-muted);
+            margin-top: 2px;
+        }
+
+        .u-qr-modal-close {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--border-hairline);
+            background: var(--white);
+            color: var(--navy);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.88rem;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .u-qr-modal-close:hover {
+            background: var(--navy);
+            border-color: var(--navy);
+            color: var(--white);
+        }
+
+        .u-qr-modal-body {
+            padding: 18px 20px 20px;
+        }
+
+        .u-share-tabs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            border-bottom: 1px solid var(--border-hairline);
+            margin-bottom: 18px;
+        }
+
+        .u-share-tab {
+            border: none;
+            border-bottom: 2px solid transparent;
+            background: transparent;
+            color: var(--ink-muted);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 700;
+            padding: 8px 10px 10px;
+            margin-bottom: -1px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .u-share-tab.is-active {
+            color: var(--navy);
+            border-bottom-color: var(--hot-pink);
+        }
+
+        .u-share-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px 8px;
+            margin-bottom: 18px;
+        }
+
+        .u-share-tile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 4px;
+            border: none;
+            background: transparent;
+            color: var(--navy);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .u-share-circle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid var(--border-hairline);
+            background: var(--white);
+            color: var(--navy);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.08rem;
+            transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .u-share-tile:hover .u-share-circle {
+            transform: translateY(-2px);
+            background: var(--navy);
+            border-color: var(--navy);
+            color: var(--white);
+        }
+
+        .u-share-tile.is-wa:hover .u-share-circle {
+            background: #16a34a;
+            border-color: #16a34a;
+        }
+
+        .u-share-tile.is-fb:hover .u-share-circle {
+            background: #1877f2;
+            border-color: #1877f2;
+        }
+
+        .u-share-tile.is-tg:hover .u-share-circle {
+            background: #0088cc;
+            border-color: #0088cc;
+        }
+
+        .u-share-tile.is-more:hover .u-share-circle {
+            background: var(--hot-pink);
+            border-color: var(--hot-pink);
+        }
+
+        .u-copy-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--white);
+            border: 1px solid var(--border-hairline);
+            border-radius: 10px;
+            padding: 5px 5px 5px 12px;
+        }
+
+        .u-copy-input {
+            flex: 1;
+            min-width: 0;
+            border: none;
+            background: transparent;
+            font-size: 0.75rem;
+            color: var(--ink-muted);
+            outline: none;
+        }
+
+        .u-copy-btn {
+            border: none;
+            background: var(--navy);
+            color: var(--white);
+            font-size: 0.74rem;
+            font-weight: 700;
+            padding: 7px 12px;
+            border-radius: 7px;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .u-copy-btn:hover {
+            background: var(--hot-pink);
+        }
+
+        .u-copy-toast {
+            display: none;
+            font-size: 0.76rem;
+            font-weight: 600;
+            color: var(--hot-pink);
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .u-qr-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            background: var(--white);
+            border: 1px solid var(--border-hairline);
+            border-radius: 14px;
+            margin-bottom: 12px;
+        }
+
+        #umkmQrCodeCanvas img,
+        #umkmQrCodeCanvas canvas {
+            display: block;
+        }
+
+        .u-qr-hint {
+            font-size: 0.8rem;
+            color: var(--ink-muted);
+            margin: 0 0 14px;
+        }
+
+        .u-cta-bar {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .u-share-modal-dialog {
+            max-width: 390px;
+        }
+
+        @media (max-width: 575px) {
+            .u-cta-bar {
+                flex-wrap: nowrap;
+                gap: 8px;
+            }
+
+            .u-cta-bar .u-cta-wa {
+                flex: 1;
+                width: auto !important;
+                justify-content: center;
+                padding: 11px 16px;
+                white-space: nowrap;
+            }
+
+            .u-cta-bar .u-cta-icon-btn {
+                width: 46px !important;
+                height: 46px;
+                padding: 0;
+                border-radius: 50%;
+                flex-shrink: 0;
+                justify-content: center;
+                font-size: 1.05rem;
+            }
+
+            .u-share-modal-dialog {
+                max-width: 300px;
+                margin: 12px auto;
+            }
+
+            .u-qr-modal-content {
+                border-radius: 16px;
+            }
+
+            .u-qr-modal-head {
+                padding: 14px 16px;
+            }
+
+            .u-qr-modal-title {
+                font-size: 0.92rem;
+            }
+
+            .u-qr-modal-body {
+                padding: 14px 16px 16px;
+            }
+
+            .u-share-tabs {
+                margin-bottom: 14px;
+            }
+
+            .u-share-tab {
+                padding: 6px 8px 8px;
+                font-size: 0.76rem;
+            }
+
+            .u-share-grid {
+                gap: 10px 6px;
+                margin-bottom: 14px;
+            }
+
+            .u-share-circle {
+                width: 38px;
+                height: 38px;
+                font-size: 0.98rem;
+            }
+
+            .u-share-tile {
+                font-size: 0.68rem;
+                gap: 5px;
+            }
+
+            .u-copy-bar {
+                padding: 4px 4px 4px 10px;
+            }
+
+            .u-copy-btn {
+                padding: 6px 10px;
+                font-size: 0.7rem;
+            }
+
+            .u-qr-box {
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+
+            #umkmQrCodeCanvas img,
+            #umkmQrCodeCanvas canvas {
+                width: 160px !important;
+                height: 160px !important;
+            }
+        }
     </style>
 @endsection
 
@@ -411,15 +737,27 @@
                         @endif
                     </div>
 
-                    <div class="d-flex flex-wrap gap-3">
+                    <div class="u-cta-bar">
                         @if($waLink)
-                            <a href="{{ $waLink }}" target="_blank" class="ed-btn-primary">
+                            <a href="{{ $waLink }}" target="_blank" class="ed-btn-primary u-cta-wa">
                                 <i class="bi bi-whatsapp"></i> Hubungi WhatsApp
                             </a>
                         @endif
-                        <a href="#lokasi-umkm" class="ed-btn-secondary">
-                            <i class="bi bi-geo-alt"></i> Lihat Lokasi
+                        <a href="#lokasi-umkm"
+                           class="ed-btn-secondary u-cta-icon-btn"
+                           title="Lihat Lokasi"
+                           aria-label="Lihat Lokasi">
+                            <i class="bi bi-geo-alt"></i> <span class="d-none d-sm-inline">Lihat Lokasi</span>
                         </a>
+                        <button type="button"
+                                id="uOpenShareBtn"
+                                class="ed-btn-secondary u-cta-icon-btn"
+                                title="Bagikan UMKM"
+                                aria-label="Bagikan UMKM"
+                                data-bs-toggle="modal"
+                                data-bs-target="#umkmShareModal">
+                            <i class="bi bi-share"></i> <span class="d-none d-sm-inline">Bagikan</span>
+                        </button>
                     </div>
                 </div>
 
@@ -649,9 +987,276 @@
         </div>
     </section>
 
+    {{-- UNIFIED SHARE & QR CODE MODAL --}}
+    @php
+        $shareText = 'Lihat profil dan katalog produk ' . $umkm->nama_usaha . ' di Desa Sebong Lagoi: ' . url()->current();
+        $shareUrl = url()->current();
+    @endphp
+    <div class="modal fade" id="umkmShareModal" tabindex="-1" aria-labelledby="umkmShareModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered u-share-modal-dialog">
+            <div class="modal-content u-qr-modal-content">
+                <div class="u-qr-modal-head">
+                    <div>
+                        <h5 class="u-qr-modal-title" id="umkmShareModalLabel">Bagikan UMKM</h5>
+                        <span class="u-qr-modal-sub">{{ $umkm->nama_usaha }}</span>
+                    </div>
+                    <button type="button" class="u-qr-modal-close" data-bs-dismiss="modal" aria-label="Tutup">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+
+                <div class="u-qr-modal-body">
+                    <div class="u-share-tabs" role="tablist">
+                        <button type="button" class="u-share-tab is-active" data-tab-target="uTabShare" aria-selected="true">
+                            Bagikan
+                        </button>
+                        <button type="button" class="u-share-tab" data-tab-target="uTabQr" aria-selected="false">
+                            QR Code
+                        </button>
+                    </div>
+
+                    {{-- Tab 1: Share Channels + Copy Link --}}
+                    <div id="uTabShare">
+                        <div class="u-share-grid">
+                            <a href="https://api.whatsapp.com/send?text={{ urlencode($shareText) }}"
+                               target="_blank"
+                               rel="noopener"
+                               class="u-share-tile is-wa">
+                                <span class="u-share-circle"><i class="bi bi-whatsapp"></i></span>
+                                <span>WhatsApp</span>
+                            </a>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($shareUrl) }}"
+                               target="_blank"
+                               rel="noopener"
+                               class="u-share-tile is-fb">
+                                <span class="u-share-circle"><i class="bi bi-facebook"></i></span>
+                                <span>Facebook</span>
+                            </a>
+                            <a href="https://t.me/share/url?url={{ urlencode($shareUrl) }}&text={{ urlencode('Profil UMKM ' . $umkm->nama_usaha . ' — Desa Sebong Lagoi') }}"
+                               target="_blank"
+                               rel="noopener"
+                               class="u-share-tile is-tg">
+                                <span class="u-share-circle"><i class="bi bi-telegram"></i></span>
+                                <span>Telegram</span>
+                            </a>
+                            <a href="https://twitter.com/intent/tweet?text={{ urlencode('Profil UMKM ' . $umkm->nama_usaha . ' — Desa Sebong Lagoi') }}&url={{ urlencode($shareUrl) }}"
+                               target="_blank"
+                               rel="noopener"
+                               class="u-share-tile">
+                                <span class="u-share-circle"><i class="bi bi-twitter-x"></i></span>
+                                <span>X</span>
+                            </a>
+                            <a href="mailto:?subject={{ rawurlencode('Profil UMKM ' . $umkm->nama_usaha . ' — Desa Sebong Lagoi') }}&body={{ rawurlencode($shareText) }}"
+                               class="u-share-tile">
+                                <span class="u-share-circle"><i class="bi bi-envelope"></i></span>
+                                <span>Email</span>
+                            </a>
+                            <button type="button" id="uNativeShareBtn" class="u-share-tile is-more">
+                                <span class="u-share-circle"><i class="bi bi-box-arrow-up"></i></span>
+                                <span>Lainnya</span>
+                            </button>
+                        </div>
+
+                        <div class="u-copy-bar">
+                            <input type="text" class="u-copy-input" value="{{ $shareUrl }}" readonly aria-label="Tautan profil UMKM">
+                            <button type="button" id="uModalCopyBtn" class="u-copy-btn">
+                                Salin
+                            </button>
+                        </div>
+                        <div id="uModalCopyToast" class="u-copy-toast">Tautan disalin!</div>
+                    </div>
+
+                    {{-- Tab 2: QR / Barcode --}}
+                    <div id="uTabQr" class="d-none text-center">
+                        <div class="u-qr-box">
+                            <div id="umkmQrCodeCanvas"></div>
+                        </div>
+                        <p class="u-qr-hint">Pindai QR untuk membuka profil {{ $umkm->nama_usaha }}.</p>
+                        <button type="button" id="uDownloadQrBtn" class="ed-btn-primary w-100 justify-content-center">
+                            <i class="bi bi-download"></i> Unduh QR PNG
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        (function () {
+            var shareUrl = @json(url()->current());
+            var umkmName = @json($umkm->nama_usaha);
+            var umkmSlug = @json($umkm->slug);
+
+            function copyLink(toastEl, customMsg) {
+                function showToast() {
+                    if (!toastEl) return;
+                    if (customMsg) toastEl.textContent = customMsg;
+                    toastEl.style.display = 'block';
+                    setTimeout(function () {
+                        toastEl.style.display = 'none';
+                    }, 2500);
+                }
+
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(shareUrl).then(showToast);
+                } else {
+                    var ta = document.createElement('textarea');
+                    ta.value = shareUrl;
+                    ta.setAttribute('readonly', '');
+                    ta.style.position = 'fixed';
+                    ta.style.opacity = '0';
+                    document.body.appendChild(ta);
+                    ta.select();
+                    try {
+                        document.execCommand('copy');
+                        showToast();
+                    } finally {
+                        document.body.removeChild(ta);
+                    }
+                }
+            }
+
+            var modalCopyBtn = document.getElementById('uModalCopyBtn');
+            var modalCopyToast = document.getElementById('uModalCopyToast');
+            if (modalCopyBtn) {
+                modalCopyBtn.addEventListener('click', function () {
+                    copyLink(modalCopyToast, 'Tautan disalin ke clipboard!');
+                });
+            }
+
+            var nativeShareBtn = document.getElementById('uNativeShareBtn');
+            if (nativeShareBtn) {
+                nativeShareBtn.addEventListener('click', function () {
+                    if (navigator.share) {
+                        navigator.share({
+                            title: umkmName + ' — Desa Sebong Lagoi',
+                            text: 'Lihat profil dan katalog produk ' + umkmName + ' di Desa Sebong Lagoi',
+                            url: shareUrl,
+                        }).catch(function () {});
+                    } else {
+                        copyLink(modalCopyToast, 'Peramban tidak mendukung Share langsung — tautan disalin!');
+                    }
+                });
+            }
+
+            var qrGenerated = false;
+            var qrContainer = document.getElementById('umkmQrCodeCanvas');
+
+            function ensureQrGenerated() {
+                if (qrGenerated || !qrContainer || typeof QRCode === 'undefined') return;
+                qrContainer.innerHTML = '';
+                new QRCode(qrContainer, {
+                    text: shareUrl,
+                    width: 240,
+                    height: 240,
+                    colorDark: '#0f1b3d',
+                    colorLight: '#ffffff',
+                    correctLevel: QRCode.CorrectLevel.H,
+                });
+                qrGenerated = true;
+            }
+
+            var tabBtns = Array.from(document.querySelectorAll('.u-share-tab'));
+            var tabShare = document.getElementById('uTabShare');
+            var tabQr = document.getElementById('uTabQr');
+
+            function switchTab(targetId) {
+                tabBtns.forEach(function (b) {
+                    var active = b.dataset.tabTarget === targetId;
+                    b.classList.toggle('is-active', active);
+                    b.setAttribute('aria-selected', active ? 'true' : 'false');
+                });
+                if (tabShare) tabShare.classList.toggle('d-none', targetId !== 'uTabShare');
+                if (tabQr) tabQr.classList.toggle('d-none', targetId !== 'uTabQr');
+                if (targetId === 'uTabQr') {
+                    ensureQrGenerated();
+                }
+            }
+
+            tabBtns.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    switchTab(btn.dataset.tabTarget);
+                });
+            });
+
+            var shareModalEl = document.getElementById('umkmShareModal');
+            if (shareModalEl) {
+                shareModalEl.addEventListener('show.bs.modal', function () {
+                    switchTab('uTabShare');
+                });
+            }
+
+            var downloadBtn = document.getElementById('uDownloadQrBtn');
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', function () {
+                    ensureQrGenerated();
+                    if (!qrContainer) return;
+
+                    var qrCanvas = qrContainer.querySelector('canvas');
+                    var qrImg = qrContainer.querySelector('img');
+                    var qrSource = qrCanvas || qrImg;
+                    if (!qrSource) return;
+
+                    var cardW = 640;
+                    var cardH = 820;
+                    var out = document.createElement('canvas');
+                    out.width = cardW;
+                    out.height = cardH;
+                    var ctx = out.getContext('2d');
+
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(0, 0, cardW, cardH);
+                    ctx.strokeStyle = '#e5e9f2';
+                    ctx.lineWidth = 4;
+                    ctx.strokeRect(2, 2, cardW - 4, cardH - 4);
+
+                    ctx.fillStyle = '#0f1b3d';
+                    ctx.fillRect(0, 0, cardW, 112);
+
+                    ctx.fillStyle = '#ff3d8b';
+                    ctx.font = 'bold 18px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('DESA SEBONG LAGOI · PROFIL UMKM RESMI', cardW / 2, 50);
+
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = 'bold 28px sans-serif';
+                    ctx.fillText(umkmName.slice(0, 34), cardW / 2, 88);
+
+                    var qrSize = 380;
+                    var qrX = (cardW - qrSize) / 2;
+                    var qrY = 160;
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(qrX - 24, qrY - 24, qrSize + 48, qrSize + 48);
+                    ctx.strokeStyle = '#e5e9f2';
+                    ctx.lineWidth = 2;
+                    ctx.strokeRect(qrX - 24, qrY - 24, qrSize + 48, qrSize + 48);
+                    ctx.drawImage(qrSource, qrX, qrY, qrSize, qrSize);
+
+                    ctx.fillStyle = '#0f1b3d';
+                    ctx.font = 'bold 26px sans-serif';
+                    ctx.fillText(umkmName.slice(0, 36), cardW / 2, 646);
+
+                    ctx.fillStyle = '#5b647a';
+                    ctx.font = '20px sans-serif';
+                    ctx.fillText('Scan QR untuk lihat profil & katalog produk', cardW / 2, 686);
+
+                    ctx.fillStyle = '#0f1b3d';
+                    ctx.font = '15px sans-serif';
+                    ctx.fillText(shareUrl.length > 62 ? shareUrl.slice(0, 59) + '...' : shareUrl, cardW / 2, 748);
+
+                    var link = document.createElement('a');
+                    link.download = 'qr-umkm-' + umkmSlug + '.png';
+                    link.href = out.toDataURL('image/png');
+                    link.click();
+                });
+            }
+        })();
+    </script>
+
     @if($umkm->latitude && $umkm->longitude)
         <!-- Leaflet Map JS -->
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
